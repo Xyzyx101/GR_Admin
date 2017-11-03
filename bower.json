@@ -1,15 +1,18 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
-  "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
-  "license": "MIT",
+  "name": "gr_admin",
+  "description": "Garage Reality Admin tool",
+  "version": "0.0.1",
+  "homepage": "http://garagereality.io/",
+  "license": "proprietary",
   "private": true,
   "dependencies": {
-    "angular": "~1.5.0",
-    "angular-route": "~1.5.0",
-    "angular-loader": "~1.5.0",
-    "angular-mocks": "~1.5.0",
+    "angular": "~1.6",
+    "angular-route": "~1.6",
+    "angular-loader": "~1.6",
+    "angular-mocks": "~1.6",
+    "angular-animate": "~1.6",
+    "angular-aria": "~1.6",
+    "angular-material": "~1.1",
     "html5-boilerplate": "^5.3.0"
   }
 }

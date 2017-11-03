@@ -1,14 +1,26 @@
-'use strict';
+(function() {
+    'use strict';
 
-// Declare app level module which depends on views, and components
-angular.module('myApp', [
-  'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
-]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
+    angular
+        .module('grAdminTool', [
+          'ngRoute',
+          'ngAnimate',
+          'ngMaterial',
+          'grAdminTool.version',
+          'login',
+          'sideNav',
+          'project'
+        ])
+        .config(MaterialTheme);
 
-  $routeProvider.otherwise({redirectTo: '/view1'});
-}]);
+        MaterialTheme.$inject = ['$mdThemingProvider'];
+
+        /* @ngInject */
+        function MaterialTheme($mdThemingProvider) {
+          $mdThemingProvider.theme('default')
+          .primaryPalette('blue-grey')
+          .accentPalette('blue-grey')
+          .warnPalette('deep-orange')
+          .backgroundPalette('grey');
+        }
+})();

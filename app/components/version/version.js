@@ -1,8 +1,9 @@
-'use strict';
+(function() {
+    'use strict';
 
-angular.module('myApp.version', [
-  'myApp.version.interpolate-filter',
-  'myApp.version.version-directive'
-])
-
-.value('version', '0.1');
+    angular
+        .module('grAdminTool.version', [
+            'grAdminTool.version.version-directive'
+        ])
+        .value('version', '0.0.1');
+})();

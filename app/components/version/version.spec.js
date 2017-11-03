@@ -1,9 +1,9 @@
 'use strict';
 
-describe('myApp.version module', function() {
-  beforeEach(module('myApp.version'));
+describe('grAdminTool.version module', function() {
+  beforeEach(module('grAdminTool.version'));
 
-  describe('app-version directive', function() {
+  describe('grAdminTool.version directive', function() {
     it('should print current version', function() {
       module(function($provide) {
         $provide.value('version', 'TEST_VER');
@@ -13,5 +13,11 @@ describe('myApp.version module', function() {
         expect(element.text()).toEqual('TEST_VER');
       });
     });
+  });
+
+  describe('version service', function() {
+    it('should return current version', inject(function(version) {
+      expect(version).toEqual('0.0.1');
+    }));
   });
 });
