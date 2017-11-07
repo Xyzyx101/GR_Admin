@@ -1,5 +1,28 @@
 /* app css stylesheet */
 
-.version {
+.version
+{
   text-align: right;
+}
+
+.logged-in-user
+{
+  -webkit-margin-before:2px;
+  -webkit-margin-after: 0px;
+  -webkit-margin-start: 6px;
+  -webkit-margin-end: 0px;
+  margin 2px 6px 0px 0px;
+}
+
+.logout-button {
+  padding: 0 6px 0 4px;
+  margin: 6px 2px 6px 2px;
+  min-width: 44px;
+  border-radius: 3px;
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration:none;
+  border: none;
+  outline: none;
 }

@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('login', ['sideNav']);
+        .module('login', ['sideNav', 'grFirebase']);
 })();

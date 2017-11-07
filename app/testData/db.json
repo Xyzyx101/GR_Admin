@@ -1,0 +1,22 @@
+{
+  "systemAdmins" : [
+    "U9ydPJ8Qq3RCmpCk04Av8nXUGM52"
+  ],
+  "projectAdmins" : {
+    "g2vvbo6taLOcJQXHX4RjsN95n1h1" : [
+      "TestProject"
+    ]
+  },
+  "projects" : {
+    "TestProject" : {
+      "projectName" : "Test Project",
+      "customer" : "TestCo",
+    },
+    "AvalonTowns" : {
+      "projectName" : "Avalon Urban Towns",
+      "customer" : "Savic Homes"
+    }
+  },
+  "masterOptionList" : [
+  ]
+}

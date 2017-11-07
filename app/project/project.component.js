@@ -8,10 +8,10 @@
     controller: ProjectController,
   });
 
-  ProjectController.$inject = ['SideNavOpener'];
+  ProjectController.$inject = [];
 
   /* @ngInject */
-  function ProjectController(SideNavOpener) {
-      SideNavOpener.Close();
+  function ProjectController() {
+      
   }
 })();

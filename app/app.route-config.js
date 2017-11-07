@@ -14,6 +14,9 @@
     .when('/login', {
       template: '<login></login>'
     })
+    .when('/home', {
+      template: '<home></home>'
+    })
     .when('/project/:projectId', {
       template: '<project></project>'
     })

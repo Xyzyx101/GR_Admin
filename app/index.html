@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
+  <title>GR Admin Tool</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16">
@@ -24,13 +24,13 @@
   <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
   <md-toolbar layout="row" layout-align="start center" class="md-toolbar-tools">
-    <h1 layout="column" flex="grow" class="md-title" >GR Admin Tool</h1>
-    <div layout="column" flex="nogrow" class="md-caption" layout-align="end end">version: <span app-version></span></div>
+    <h1 flex="grow" class="md-title" >GR Admin Tool</h1>
+    <div flex="nogrow" class="md-caption" layout-align="end end">version: <span app-version></span></div>
   </md-toolbar>
   <section flex layout="row">
     <side-nav flex="20" layout="column"></side-nav>
-    <md-content id="content" layout-padding>
-      <div ng-view></div>
+    <md-content id="content" flex layout-padding>
+      <div flex layout="column" ng-view></div>
     </md-content>
   </section>
 
@@ -42,16 +42,23 @@
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/angular-aria/angular-aria.js"></script>
 <script src="bower_components/angular-material/angular-material.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+<script src="bower_components/firebase/firebase.js" charset="utf-8"></script>
+<script src="bower_components/angularfire/dist/angularfire.js" charset="utf-8"></script>
 <script src="app.js"></script>
 <script src="app.route-config.js"></script>
 <script src="components/version/version.js"></script>
 <script src="components/version/version-directive.js"></script>
 <script src="login/login.module.js" charset="utf-8"></script>
 <script src="login/login.component.js" charset="utf-8"></script>
+<script src="login/home.component.js" charset="utf-8"></script>
 <script src="side-nav/side-nav.module.js" charset="utf-8"></script>
 <script src="side-nav/side-nav.component.js" charset="utf-8"></script>
-<script src="side-nav/side-nav.service.js" charset="utf-8"></script>
 <script src="project/project.module.js" charset="utf-8"></script>
 <script src="project/project.component.js" charset="utf-8"></script>
+<script src="grFirebase/grFirebase.module.js" charset="utf-8"></script>
+<script src="grFirebase/grFirebase.service.js" charset="utf-8"></script>
+
+</script>
 </body>
 </html>

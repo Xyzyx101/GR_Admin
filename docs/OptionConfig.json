@@ -1,0 +1,54 @@
+{
+  "ProjectID" : "AvalonTowns",
+  "ProjectDisplayText" : "Avalon Urban Towns",
+  "Selections" : {
+    "_comment" : "This is used for global project options",
+    "FixtureID" : "FName",
+    "FixtureDisplayText" : "Pretty Name ie Kitchen Counter",
+    "FixtureCategoryText" : "Selection category ie Kitchen|Bathroom|etc",
+    "Options" : [
+      "OptionID",
+      "OptionID",
+      "OptionID",
+    ],
+    "DefaultOption" : "OptionID or the first on in the list if blank"
+  },
+  "UnitOverrides" : {
+    "_comment" : "This is used for unit specific options",
+    "Overrides" : {
+      "Lyra" : {
+        "OverrideType" : "Add|Remove|Replace",
+        "Selections" : {
+          "FixtureID" : "FName",
+          "FixtureDisplayText" : "Pretty Name ie Kitchen Island",
+          "FixtureCategoryText" : "Selection category ie Kitchen|Bathroom|etc",
+          "Options" : [
+            "NoIsland_OptionConfig.json",
+            "LyraIsland_OptionConfig.json",
+          ]
+        },
+      }
+    }
+  },
+  "Palettes" : [
+    {
+      "PaletteID" : "Palette1",
+      "PaletteDisplayText" : "Moderno",
+      "PaletteSelection" :        {
+          "FixtureID" : "OptionID",
+          "WallColor" : "WhitePaint",
+          "Countertop" : "Granite"
+        },
+    },
+    {
+      "PaletteID" : "Palette2",
+    },
+  ],
+  "DefaultPalette" : "PaletteID or the first one on the list if blank",
+  "_comment" : "ProjectOptions are options specific to a project that are not in the option master list",
+  "ProjectOptions" : [
+    "SelectionOption.json",
+    "SelectionOption.json",
+    "SelectionOption.json",
+  ]
+}

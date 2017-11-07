@@ -1,0 +1,15 @@
+{
+  "option-master-list" : [],
+  "projects" : [
+    {
+      "projectId" : "test-project",
+      "customer" : "test-company",
+      "name" : "Bacon",
+      "admins" : [
+        "user12345",
+        "user98765"
+      ],
+      "option-config" : {}
+    }
+  ]
+}

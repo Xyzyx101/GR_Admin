@@ -1,10 +1,21 @@
-<div class="">
-  <h1>Login Screen</h1>
-  <h1>Login Screen</h1>
-  <h1>Login Screen</h1>
-  <h1>Login Screen</h1>
-  <h1>Login Screen</h1>
-  <h1>Login Screen</h1>
-  <h1>Login Screen</h1>
-  <h1>Login Screen</h1>
+
+<div layout="column" flex="70" md-whiteframe="2">
+  <md-toolbar flex layout-align="start left" class="md-toolbar-tools">
+    <h1>Login</h1>
+  </md-toolbar>
+  <md-content flex layout-padding>
+    <div layout="column" layout-align="center center">
+      <md-input-container>
+        <label>Email</label>
+        <input ng-model="loginData.email" type="email">
+      </md-input-container>
+      <md-input-container>
+        <label>Password</label>
+        <input ng-model="loginData.password" type="password">
+      </md-input-container>
+      <md-button ng-click="Login()" class="md-raised md-accent">Login</md-button>
+      <md-content ng-if="error" md-colors="{color: 'warn-500'}" class="md-warn">{{error}}</md-content>
+    </div>
+  </md-content>
+  <pre>{{user.email}}</pre>
 </div>

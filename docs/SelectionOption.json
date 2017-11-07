@@ -1,0 +1,9 @@
+{
+    "AssetName" : "Unreal asset path : MatO_WhitePaint",
+    "OptionID" : "FName",
+    "OptionDisplayText" : "Pretty Display Name",
+    "TechnicalText" : "Serial/Product number",
+    "VendorText" : "Vendor Name",
+    "CategoryText" : "Used to simplify configuration by sorting ie Kitchen Counter|PaintColour",
+    "OptionType" : "Model|Material|InstancedModel"
+}

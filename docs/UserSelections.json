@@ -1,0 +1,22 @@
+{
+  "ProjectID" : "AvalonTowns",
+  "UserName" : "ABCD1234",
+  "Units " : [
+    {
+      "UnitID" : "Lyra",
+      "Selections" : [
+        { "FixtureID" : "OptionID" },
+        { "FixtureID" : "OptionID" },
+        { "FixtureID" : "OptionID" }
+      ]
+    },
+    {
+      "UnitID" : "Cruz",
+      "Selections" : [
+        { "FixtureID" : "OptionID" },
+        { "FixtureID" : "OptionID" },
+        { "FixtureID" : "OptionID" }
+      ]
+    }
+  ]
+}

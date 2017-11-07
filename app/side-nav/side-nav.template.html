@@ -1,22 +1,30 @@
-<md-content layout-padding md-colors="::{background: 'default-accent-100'}">
+<md-content ng-if="user" layout="column" layout-padding md-colors="::{background: 'default-accent-100'}">
+
+  <md-toolbar class="md-accent">
+    <p class="logged-in-user md-caption">{{user.displayName}}</p>
+    <p class="md-caption logged-in-user">{{user.email}}</p>
+    <md-button class="logout-button" md-whiteframe="1" ng-click="LogOut()">Log Out</md-button>
+  </md-toolbar>
+
+  <md-toolbar>
+    <h3 class="md-subhead">Projects</h3>
+  </md-toolbar>
+
   <md-input-container>
     <label>Sort By</label>
-    <md-select ng-model="$ctrl.orderProp" placeholder="name" class="md-no-underline">
+    <md-select ng-model="orderProp" placeholder="name" class="md-no-underline">
       <md-option value="name">Name</md-option>
       <md-option value="age">Age</md-option>
     </md-select>
   </md-input-container>
+
   <md-input-container>
     <label>Search</label>
     <input type="text" ng-model="$ctrl.query">
   </md-input-container>
 
-  <md-toolbar class="md-accent">
-    <h1 class="md-toolbar-tools">Projects</h1>
-  </md-toolbar>
-
   <md-list class="md-dense" flex>
-    <md-list-item class="md-2-line" ng-repeat="project in $ctrl.projects | filter:$ctrl.query | orderBy:$ctrl.orderProp">
+    <md-list-item class="md-2-line" ng-repeat="project in projects | filter:$ctrl.query | orderBy:orderProp">
       <a href="#!/project/{{project.id}}">
         <div class="md-list-item-text" layout="column">
           <h3>{{project.name}}</h3>
@@ -24,8 +32,10 @@
         </div>
       </a>
     </md-list-item>
-    <!-- json debug view -->
-    <div class="row">
-      <pre>{{$ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp | json}}</pre>
-    </div>
-  </md-content>
+  </md-list>
+  <!-- json debug view -->
+  <div class="row">
+    <pre>{{$ctrl.phones | filter:$ctrl.query | orderBy:$ctrl.orderProp | json}}</pre>
+  </div>
+  <pre ng-if="user">{{$ctrl.user}}</pre>
+</md-content>
