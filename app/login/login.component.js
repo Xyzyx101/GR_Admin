@@ -8,20 +8,25 @@
     controller: LoginController,
   });
 
-  LoginController.$inject = ['$rootScope','$scope', 'GRFirebase', '$log'];
+  LoginController.$inject = ['$scope','$location', 'Auth'];
 
   /* @ngInject */
-  function LoginController($rootScope, $scope, GRFirebase, $log) {
+  function LoginController($scope, $location, Auth) {
     $scope.error = '';
-    $scope.loginData = {email: '', password: ''};
-    $scope.Login = function login() {
-      GRFirebase.Auth().$signInWithEmailAndPassword($scope.loginData.email, $scope.loginData.password).catch(function(error) {
-        $scope.error = error.message;
-        $scope.user = $rootScope.user;
-      });
-    }
-    GRFirebase.Auth().$onAuthStateChanged(function(firebaseUser) {
-      $scope.user = $rootScope.user;
+    $scope.email = '';
+    $scope.password = '';
+
+    $scope.Login = function() {
+      Auth.Login($scope.email, $scope.password);
+    };
+    $scope.$on("Auth:StateChanged", function() {
+      $scope.user = Auth.User();
+      if($scope.user.authenticated) {
+          $location.path('/home');
+      }
+    });
+    $scope.$on("Auth:Error", function(error) {
+      $scope.error = Auth.AuthError();
     });
   }
 })();

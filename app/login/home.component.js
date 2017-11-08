@@ -12,6 +12,5 @@
 
   /* @ngInject */
   function HomeController() {
-
   }
 })();

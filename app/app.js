@@ -9,7 +9,8 @@
           'grAdminTool.version',
           'login',
           'sideNav',
-          'project'
+          'project',
+          'grFirebase'
         ])
         .config(MaterialTheme);
 

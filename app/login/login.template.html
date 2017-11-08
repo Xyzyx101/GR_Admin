@@ -1,21 +1,20 @@
 
-<div layout="column" flex="70" md-whiteframe="2">
-  <md-toolbar flex layout-align="start left" class="md-toolbar-tools">
-    <h1>Login</h1>
-  </md-toolbar>
-  <md-content flex layout-padding>
-    <div layout="column" layout-align="center center">
+<div flex layout="column" layout-align="center center" layout-padding>
+  <div md-whiteframe="3" class="login-box">
+    <md-toolbar class="md-toolbar-tools">
+      <h1>Login</h1>
+    </md-toolbar>
+    <form layout="column" layout-align="center center">
       <md-input-container>
         <label>Email</label>
-        <input ng-model="loginData.email" type="email">
+        <input ng-keyup="$event.keyCode == 13 && Login()" ng-model="email" type="email">
       </md-input-container>
       <md-input-container>
         <label>Password</label>
-        <input ng-model="loginData.password" type="password">
+        <input ng-keyup="$event.keyCode == 13 && Login()" ng-model="password" type="password">
       </md-input-container>
       <md-button ng-click="Login()" class="md-raised md-accent">Login</md-button>
-      <md-content ng-if="error" md-colors="{color: 'warn-500'}" class="md-warn">{{error}}</md-content>
-    </div>
-  </md-content>
-  <pre>{{user.email}}</pre>
+      <p ng-if="error" md-colors="{color: 'warn-500'}" class="md-warn">{{error}}</p>
+    </form>
+  </div>
 </div>

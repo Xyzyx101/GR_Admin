@@ -26,3 +26,23 @@
   border: none;
   outline: none;
 }
+
+.nav-bar {
+  height: 92vh;
+}
+
+.project-list {
+  overflow-y: scroll;
+}
+
+.logo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.login-box{
+  min-width: 60%;
+  min-height: 30%;
+  margin-top: 15%;
+}

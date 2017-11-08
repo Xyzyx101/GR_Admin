@@ -13,8 +13,8 @@
   <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="img/favicon-96x96.png" sizes="96x96">
   <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,700'>
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <!-- <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css"> -->
   <link href="bower_components/angular-material/angular-material.css" rel="stylesheet" />
   <link rel="stylesheet" href="app.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -27,11 +27,8 @@
     <h1 flex="grow" class="md-title" >GR Admin Tool</h1>
     <div flex="nogrow" class="md-caption" layout-align="end end">version: <span app-version></span></div>
   </md-toolbar>
-  <section flex layout="row">
-    <side-nav flex="20" layout="column"></side-nav>
-    <md-content id="content" flex layout-padding>
+  <section layout="row">
       <div flex layout="column" ng-view></div>
-    </md-content>
   </section>
 
   <!-- In production use:
@@ -57,7 +54,7 @@
 <script src="project/project.module.js" charset="utf-8"></script>
 <script src="project/project.component.js" charset="utf-8"></script>
 <script src="grFirebase/grFirebase.module.js" charset="utf-8"></script>
-<script src="grFirebase/grFirebase.service.js" charset="utf-8"></script>
+<script src="grFirebase/grFirebase.Auth.service.js" charset="utf-8"></script>
 
 </script>
 </body>
