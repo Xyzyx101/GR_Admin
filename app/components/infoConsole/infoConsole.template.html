@@ -1,0 +1,8 @@
+<md-content flex="nogrow" id="console-container" class="console-container">
+  <ul flex>
+    <li class="console-row" ng-repeat="message in $ctrl.messages">
+      <pre class="console-row" md-colors="{{message.color}}">{{message.message}}</pre>
+    </li>
+  </ul>
+  <a id="bottom"></a>
+</md-content>

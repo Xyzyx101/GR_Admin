@@ -1,6 +1,6 @@
 <div flex layout="row">
   <side-nav flex="nogrow" class="side-nav"></side-nav>
-  <div flex="70" layout="column" layout-align="start top">
+  <div flex layout="column" layout-align="start top">
     <md-toolbar class="md-accent md-toolbar-tools">
       <h1>Project Admin</h1>
     </md-toolbar>
@@ -31,11 +31,10 @@
                 <legend md-colors="{color:'primary'}">Upload New Master List</legend>
                 <md-button ng-click="uploadMasterList();" class="md-raised md-primary" ng-disabled="!uploadEnabled">Upload</md-button>
                 <input type="file" id="upload-list" gr-file-select />
-                <p flex ng-if="uploadError" md-colors="{color: 'warn-500'}" class="md-warn">{{uploadError}}</p>
-                <p flex ng-if="uploadMessage" md-colors="{color: 'primary-500'}" class="md-warn">{{uploadMessage}}</p>
               </fieldset>
             </div>
           </div>
+          <info-console></info-console>
           <div flex class="">
             <pre>{{masterList | json}}</pre>
           </div>

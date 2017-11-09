@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('admin', ['grFirebase', 'ngFileSaver']);
+        .module('admin', ['grFirebase', 'ngFileSaver', 'infoConsole']);
 })();

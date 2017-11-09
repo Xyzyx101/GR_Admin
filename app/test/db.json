@@ -10,13 +10,12 @@
   "projects" : {
     "TestProject" : {
       "projectName" : "Test Project",
-      "customer" : "TestCo",
+      "customer" : "TestCo"
     },
     "AvalonTowns" : {
       "projectName" : "Avalon Urban Towns",
       "customer" : "Savic Homes"
     }
   },
-  "masterOptionList" : [
-  ]
+  "masterOptionList" : []
 }
