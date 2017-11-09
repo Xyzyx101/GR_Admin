@@ -1,0 +1,46 @@
+<div flex layout="row">
+  <side-nav flex="nogrow" class="side-nav"></side-nav>
+  <div flex="70" layout="column" layout-align="start top">
+    <md-toolbar class="md-accent md-toolbar-tools">
+      <h1>Project Admin</h1>
+    </md-toolbar>
+    <md-tabs md-dynamic-height>
+      <md-tab>
+        <md-tab-label class="md-primary">
+          Manage Projects
+        </md-tab-label>
+        <md-tab-body>
+          buttons and shit
+        </md-tab-body>
+      </md-tab>
+      <md-tab>
+        <md-tab-label>
+          Master List
+        </md-tab-label>
+        <md-tab-body flex layout="column">
+          <div flex layout="row" layout-padding layout-align="center center">
+            <div md-whiteframe="1" layout-margin layout-padding>
+              <fieldset class="fieldset-standard">
+                <legend md-colors="{color:'primary'}">Backup Master List</legend>
+                <md-button ng-click="saveMasterList();" class="md-raised md-primary">Save Backup</md-button>
+                <md-checkbox md-no-ink ng-model="prettyJson" class="md-primary">Pretty Print</md-checkbox>
+              </fieldset>
+            </div>
+            <div md-whiteframe="1" layout-margin layout-padding>
+              <fieldset class="fieldset-standard">
+                <legend md-colors="{color:'primary'}">Upload New Master List</legend>
+                <md-button ng-click="uploadMasterList();" class="md-raised md-primary" ng-disabled="!uploadEnabled">Upload</md-button>
+                <input type="file" id="upload-list" gr-file-select />
+                <p flex ng-if="uploadError" md-colors="{color: 'warn-500'}" class="md-warn">{{uploadError}}</p>
+                <p flex ng-if="uploadMessage" md-colors="{color: 'primary-500'}" class="md-warn">{{uploadMessage}}</p>
+              </fieldset>
+            </div>
+          </div>
+          <div flex class="">
+            <pre>{{masterList | json}}</pre>
+          </div>
+        </md-tab-body>
+      </md-tab>
+    </md-tabs>
+  </div>
+</div>

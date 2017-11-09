@@ -10,7 +10,8 @@
           'login',
           'sideNav',
           'project',
-          'grFirebase'
+          'grFirebase',
+          'admin'
         ])
         .config(MaterialTheme);
 

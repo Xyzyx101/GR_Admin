@@ -31,6 +31,10 @@
   height: 92vh;
 }
 
+.side-nav {
+  width : 325px;
+}
+
 .project-list {
   overflow-y: scroll;
 }
@@ -42,7 +46,12 @@
 }
 
 .login-box{
-  min-width: 60%;
   min-height: 30%;
-  margin-top: 15%;
+  width: 500px;
+  margin-top: 5%;
+}
+
+.fieldset-standard{
+  border-style: solid;
+  border-width: 1px;
 }

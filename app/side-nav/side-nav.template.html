@@ -1,4 +1,4 @@
-<div class="nav-bar" layout="column" md-colors="::{background: 'default-accent-100'}">
+<div flex class="nav-bar" layout="column" md-colors="::{background: 'default-accent-100'}">
   <md-toolbar flex="5" class="md-accent">
     <p class="logged-in-user md-caption">{{user.displayName}}</p>
     <p class="md-caption logged-in-user">{{user.email}}</p>
@@ -6,7 +6,7 @@
   </md-toolbar>
 
   <md-toolbar flex="10" layout-align="" class="md-accent">
-    <md-button md-whiteframe="1" ng-click="">
+    <md-button md-whiteframe="1" ng-click="Admin();">
       <h3>Project Admin</h3>
     </md-button>
   </md-toolbar>

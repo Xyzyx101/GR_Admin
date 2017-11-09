@@ -23,6 +23,10 @@
       });
     }
 
+    $scope.Admin = function() {
+      $location.path('/admin');
+    }
+
     $scope.projects = [
       {
         "age": 1,

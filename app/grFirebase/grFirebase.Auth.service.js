@@ -9,26 +9,15 @@
 
   /* @ngInject */
   function Auth($rootScope, $firebaseAuth, $log) {
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyBKaQInnl8YaNs6ulsZGVi5qZQ7YsOpl6w",
-      authDomain: "garage-reality-test.firebaseapp.com",
-      databaseURL: "https://garage-reality-test.firebaseio.com",
-      projectId: "garage-reality-test",
-      storageBucket: "garage-reality-test.appspot.com",
-      messagingSenderId: "521229023501"
-    };
-    firebase.initializeApp(config);
-
     $rootScope.auth = null;
-
+    $rootScope.authError = null;
     $rootScope.projects = [];
 
     var firebaseAuth = $firebaseAuth();
 
     firebaseAuth.$onAuthStateChanged(function(firebaseUser) {
       if(firebaseUser === null) {
-        $rootScope.auth = null
+        $rootScope.auth = null;
       } else {
         $rootScope.auth = {
           authenticated: true,
@@ -36,13 +25,21 @@
           name: firebaseUser.name,
           email: firebaseUser.email
         }
-        //TODO check isSystemAdmin;
+        setAdminFlag($rootScope.auth);
         //TODO load projects;
       }
       $rootScope.$broadcast("Auth:StateChanged");
       $rootScope.authError = null;
-      //$rootScope.$broadcast("Auth:Error");
     })
+
+    function setAdminFlag(user) {
+      firebase.database().ref('/admins/').orderByKey().equalTo(user.uid).once('value').then(function(snapshot) {
+        if(snapshot && snapshot.val()) {
+            user.admin=snapshot.val()[user.uid]
+            $rootScope.$broadcast("Auth:StateChanged");
+        }
+      });
+    }
 
     function login(email, password) {
       firebaseAuth.$signInWithEmailAndPassword(email,password).catch(function(error) {
@@ -65,7 +62,7 @@
 
     function user() {
       if($rootScope.auth === null) {
-        return {};
+        return {authenticated: false};
       } else {
         return $rootScope.auth;
       }
