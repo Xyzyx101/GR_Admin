@@ -17,14 +17,21 @@
     MasterList.Download();
     $scope.$on("MasterList:Changed", function() {
       $scope.masterList = MasterList.GetList() || {'OptionList' : {}};
+      $scope.gridOptions.data = $scope.masterList['OptionList'];
     });
 
     $scope.gridOptions = {
+      enableFiltering: true,
       enableSorting: true,
       columnDefs: [
-        { field: 'name', minWidth: 200, width: 250, enableColumnResizing: false },
-        { field: 'gender', width: '30%', maxWidth: 200, minWidth: 70 },
-        { field: 'company', width: '20%' }
+        { field: 'OptionID', enableHiding: false, cellTooltip: true, width: '10%', enableColumnResizing: true},
+        { field: 'AssetName', enableHiding: false, cellTooltip: true, width: '20%', enableColumnResizing: true, enableFiltering: true },
+        { field: 'OptionType',enableHiding: false, cellTooltip: true, width: '10%', maxWidth: 200, minWidth: 70,enableColumnResizing: true},
+        { field: 'Category', enableHiding: false, cellTooltip: true, width: '12%',enableColumnResizing: true},
+        { field: 'OptionDisplayName', enableHiding: false, cellTooltip: true, width: '18%',enableColumnResizing: true },
+        { field: 'TechnicalName', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true},
+        { field: 'Collection', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true},
+        { field: 'Vendor', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true}
       ]
     };
     $scope.prettyJson = true;
@@ -45,7 +52,8 @@
       readJsonData(file)
       .then(verifyJsonData)
       .then(function(dataObj) {
-        $scope.masterList = dataObj;
+        $scope.masterList = dataObj["OptionList"];
+        $scope.gridOptions.data = $scope.masterList['OptionList'];
         loadLog('File verified');
         loadLog("Review the data below and press 'Upload' to update the database")
         $scope.uploadEnabled = true;
