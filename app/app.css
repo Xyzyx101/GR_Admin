@@ -32,7 +32,7 @@
 }
 
 .side-nav {
-  width : 325px;
+  width : 250px;
 }
 
 .project-list {
@@ -70,4 +70,15 @@
 
 .admin-master-list-grid {
   height: 550px;
+}
+
+.form-label {
+    bottom: 5px;
+    left: 12px;
+    font-size: 16px;
+    opacity: 0.54;
+}
+
+.manage-projects-container {
+  height: 80%;
 }

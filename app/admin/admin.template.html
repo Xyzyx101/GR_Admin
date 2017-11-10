@@ -10,7 +10,7 @@
           Manage Projects
         </md-tab-label>
         <md-tab-body>
-          buttons and shit
+          <manage-projects flex></manage-projects>
         </md-tab-body>
       </md-tab>
       <md-tab>
@@ -18,28 +18,8 @@
           Master List
         </md-tab-label>
         <md-tab-body flex layout="column">
-          <div flex layout="row" layout-padding layout-align="center center">
-            <div md-whiteframe="1" layout-margin layout-padding>
-              <fieldset class="fieldset-standard">
-                <legend md-colors="{color:'primary'}">Backup Master List</legend>
-                <md-button ng-click="saveMasterList();" class="md-raised md-primary">Save Backup</md-button>
-                <md-checkbox md-no-ink ng-model="prettyJson" class="md-primary">Pretty Print</md-checkbox>
-              </fieldset>
-            </div>
-            <div md-whiteframe="1" layout-margin layout-padding>
-              <fieldset class="fieldset-standard">
-                <legend md-colors="{color:'primary'}">Upload New Master List</legend>
-                <md-button ng-click="uploadMasterList();" class="md-raised md-primary" ng-disabled="!uploadEnabled">Upload</md-button>
-                <input type="file" id="upload-list" gr-file-select />
-              </fieldset>
-            </div>
-          </div>
-          <info-console></info-console>
-          <div flex class="">
-            <div id="grid1" ui-grid="gridOptions" class="admin-master-list-grid"></div>
-          </div>
+          <master-list flex></master-list>
         </md-tab-body>
       </md-tab>
-    </md-tabs>
   </div>
 </div>
