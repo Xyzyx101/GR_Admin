@@ -13,15 +13,20 @@
 
   /* @ngInject */
   function AdminController($scope, $q, $window, MasterList, FileSaver, Blob) {
-    $scope.myData = [
-        {
-            "firstName": "Cox",
-        }
-      ];
-    $scope.masterList = MasterList.List['OptionList'] || {};
-    $scope.$on("MasterList:Update", function() {
-      $scope.masterList = MasterList.List();
+
+    MasterList.Download();
+    $scope.$on("MasterList:Changed", function() {
+      $scope.masterList = MasterList.GetList() || {'OptionList' : {}};
     });
+
+    $scope.gridOptions = {
+      enableSorting: true,
+      columnDefs: [
+        { field: 'name', minWidth: 200, width: 250, enableColumnResizing: false },
+        { field: 'gender', width: '30%', maxWidth: 200, minWidth: 70 },
+        { field: 'company', width: '20%' }
+      ]
+    };
     $scope.prettyJson = true;
     $scope.saveMasterList = function() {
       var json = angular.toJson($scope.masterList, true);
@@ -34,13 +39,13 @@
     $scope.uploadFile = null;
     $scope.uploadEnabled = false;
     $scope.uploadMasterList = function() {
-      loadError('TODO');
+      MasterList.Upload($scope.masterList);
     }
     $scope.loadFile = function(file) {
       readJsonData(file)
       .then(verifyJsonData)
       .then(function(dataObj) {
-        $scope.masterList = dataObj['OptionList'];
+        $scope.masterList = dataObj;
         loadLog('File verified');
         loadLog("Review the data below and press 'Upload' to update the database")
         $scope.uploadEnabled = true;

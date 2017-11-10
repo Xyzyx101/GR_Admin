@@ -5,54 +5,45 @@
   .module('grFirebase')
   .factory('MasterList', MasterList);
 
-  MasterList.$inject = ['$rootScope'];
+  MasterList.$inject = ['$rootScope', '$log', 'Cleaner'];
 
   /* @ngInject */
-  function MasterList($rootScope) {
+  function MasterList($rootScope, $log, Cleaner) {
+    var list = {"OptionList": []};
 
-    $rootScope.$on("Auth:StateChanged", function() {
-      retrieve();
-    });
+    function download() {
+      firebase.database().ref('/masterlist/').orderByKey().limitToLast(1).once('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          list =  childSnapshot.val();
+          $rootScope.$broadcast("MasterList:Changed");
+        });
+      });
+    }
+    download();
 
-    function retrieve() {
+    function upload(newList) {
+      // Clean will remove the junk properties that ui-grid shoves into the data.
+      newList = Cleaner.Clean(newList);
+      var masterListRef = firebase.database().ref('/masterlist/');
+      var newlistRef = masterListRef.push();
+      newlistRef.set(newList).then(
+        function(data) {
+          $log.log(data);
+          list = newList;
+          $rootScope.$broadcast("MasterList:Changed");
+        }).catch(function(error) {
+          $log.error(error);
+        });
+      }
 
+    function getList() {
+      return list;
     }
 
-    var list = {
-      "OptionList": [
-        {
-          "AssetName": "MatO_AllureFloor",
-          "OptionType": "MaterialOption",
-          "OptionID": "/Game/OptionLibrary/Options/Material/MatO_AllureFloor.MatO_AllureFloor_C",
-          "OptionDisplayName": "Allure Floor",
-          "TechnicalName": "Allure #12345",
-          "Collection": "",
-          "Vendor": "",
-          "Category": "Floor"
-        },
-        {
-          "AssetName": "MatO_ArgentoRomano",
-          "OptionType": "MaterialOption",
-          "OptionID": "/Game/OptionLibrary/Options/Material/MatO_ArgentoRomano.MatO_ArgentoRomano_C",
-          "OptionDisplayName": "Argento Romano",
-          "TechnicalName": "12345-89",
-          "Collection": "",
-          "Vendor": "",
-          "Category": "Countertop"
-        },
-        {
-          "AssetName": "MatO_Backsplash_StainlessSteel",
-          "OptionType": "MaterialOption",
-          "OptionID": "/Game/OptionLibrary/Options/Material/MatO_Backsplash_StainlessSteel.MatO_Backsplash_StainlessSteel_C",
-          "OptionDisplayName": "Stainless Steel",
-          "TechnicalName": "12345",
-          "Collection": "",
-          "Vendor": "",
-          "Category": "Backsplash"
-        }
-      ]};
-      return {
-        List: list
-      };
+    return {
+      Download: download,
+      Upload: upload,
+      GetList: getList
+    };
   }
 })();

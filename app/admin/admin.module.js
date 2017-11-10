@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('admin', ['grFirebase', 'ngFileSaver', 'infoConsole', 'ui.grid']);
+        .module('admin', ['grFirebase', 'ngFileSaver', 'infoConsole', 'ui.grid', 'ui.grid.resizeColumns']);
 })();

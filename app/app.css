@@ -67,3 +67,7 @@
 .console-container{
   max-height:100px;
 }
+
+.admin-master-list-grid {
+  height: 550px;
+}
