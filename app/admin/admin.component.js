@@ -13,7 +13,12 @@
 
   /* @ngInject */
   function AdminController($scope, $q, $window, MasterList, FileSaver, Blob) {
-    $scope.masterList = MasterList.List || {};
+    $scope.myData = [
+        {
+            "firstName": "Cox",
+        }
+      ];
+    $scope.masterList = MasterList.List['OptionList'] || {};
     $scope.$on("MasterList:Update", function() {
       $scope.masterList = MasterList.List();
     });
@@ -34,8 +39,9 @@
     $scope.loadFile = function(file) {
       readJsonData(file)
       .then(verifyJsonData)
-      .then(function(message) {
-        loadLog(message);
+      .then(function(dataObj) {
+        $scope.masterList = dataObj['OptionList'];
+        loadLog('File verified');
         loadLog("Review the data below and press 'Upload' to update the database")
         $scope.uploadEnabled = true;
       })
@@ -89,7 +95,7 @@
           optionIdx++;
           if(optionIdx == tmpList.length) {
             $window.clearInterval(intervalId);
-            deferred.resolve('File verified');
+            deferred.resolve(dataObj);
           }
         }, 0);
       }, 0);

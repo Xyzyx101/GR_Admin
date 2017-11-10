@@ -19,7 +19,8 @@ module.exports = function(config) {
       '**/*.spec.js',
     ],
     exclude: [
-      'bower_components/angular-file-saver/src/*'
+      'bower_components/angular-file-saver/src/*',
+      'bower_components/angular-ui-grid/*'
     ],
 
     autoWatch: true,
