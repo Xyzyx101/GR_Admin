@@ -82,3 +82,7 @@
 .manage-projects-container {
   height: 80%;
 }
+
+.project-list-button h3,p {
+  margin:0px;
+}

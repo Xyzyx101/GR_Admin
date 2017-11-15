@@ -10,7 +10,7 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/firebase/firebase.js',
       'bower_components/angularfire/dist/angularfire.js',
-      'bower_components/mockfirebase/browser/mockfirebase.js',
+      'bower_components/firebase-mock/browser/firebasemock.js',
       'bower_components/sinon/pkg/sinon.js',
       'bower_components/angular-file-saver/dist/angular-file-saver.bundle.min.js',
       '**/*.module.js',

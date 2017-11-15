@@ -7,7 +7,7 @@
 
   FirebaseInit.$inject = ['firebase'];
   /* @ngInject */
-  function FirebaseInit(firebase) {
+  function FirebaseInit(firebase) {;
     // Initialize Firebase
     var config = {
       apiKey: "AIzaSyBKaQInnl8YaNs6ulsZGVi5qZQ7YsOpl6w",

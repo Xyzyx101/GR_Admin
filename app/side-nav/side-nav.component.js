@@ -8,62 +8,79 @@
     controller: SideNavController,
   });
 
-  SideNavController.$inject = ['$scope', '$location', 'Auth'];
+  SideNavController.$inject = ['$scope', '$location', '$log', 'Auth', 'ProjectList'];
 
   /* @ngInject */
-  function SideNavController($scope, $location, Auth) {
-    $scope.user = Auth.User();
+  function SideNavController($scope, $location, $log, Auth, ProjectList) {
+    var self = this;
+    this.user = Auth.User();
+    this.userDetails = Auth.UserDetails();
     $scope.$on("Auth:StateChanged", function() {
-      $scope.user = Auth.User();
+      self.user = Auth.User();
+      self.userDetails = Auth.UserDetails();
+      updateProjects();
+      //self.projects = ProjectList.GetList(self.user);
     });
 
-    $scope.LogOut = function() {
-      Auth.Logout(function() {
+    this.LogOut = function() {
+      Auth.Logout()
+      .finally(function() {
         $location.path('/login');
       });
     }
 
-    $scope.Admin = function() {
+    this.Admin = function() {
       $location.path('/admin');
     }
 
-    $scope.projects = [
-      {
-        "age": 1,
-        "id": "test-project",
-        "name": "Test Project",
-        "customer": "Santa"
-      },
-      {
-        "age": 2,
-        "id": "savic-avalon-townhomes",
-        "name": "Avalon Townhomes",
-        "customer": "Savic Homes"
-      },
-      {
-        "age": 1,
-        "id": "test-project",
-        "name": "Test Project",
-        "customer": "Santa"
-      },
-      {
-        "age": 2,
-        "id": "savic-avalon-townhomes",
-        "name": "Avalon Townhomes",
-        "customer": "Savic Homes"
-      },
-      {
-        "age": 1,
-        "id": "test-project",
-        "name": "Test Project",
-        "customer": "Santa"
-      },
-      {
-        "age": 2,
-        "id": "savic-avalon-townhomes",
-        "name": "Avalon Townhomes",
-        "customer": "Savic Homes"
-      },
-    ];
+    function updateProjects() {
+      ProjectList.GetList()
+      .then(function(list) {
+        self.projects = list;
+      }).catch(function(err) {
+        $log.error(err);
+        self.projects = [];
+      })
+    }
+    updateProjects();
+    //this.projects = ProjectList.GetList(this.user);
+    // this.projects = [
+    //   {
+    //     "age": 1,
+    //     "id": "test-project",
+    //     "name": "Test Project",
+    //     "customer": "Santa"
+    //   },
+    //   {
+    //     "age": 2,
+    //     "id": "savic-avalon-townhomes",
+    //     "name": "Avalon Townhomes",
+    //     "customer": "Savic Homes"
+    //   },
+    //   {
+    //     "age": 1,
+    //     "id": "test-project",
+    //     "name": "Test Project",
+    //     "customer": "Santa"
+    //   },
+    //   {
+    //     "age": 2,
+    //     "id": "savic-avalon-townhomes",
+    //     "name": "Avalon Townhomes",
+    //     "customer": "Savic Homes"
+    //   },
+    //   {
+    //     "age": 1,
+    //     "id": "test-project",
+    //     "name": "Test Project",
+    //     "customer": "Santa"
+    //   },
+    //   {
+    //     "age": 2,
+    //     "id": "savic-avalon-townhomes",
+    //     "name": "Avalon Townhomes",
+    //     "customer": "Savic Homes"
+    //   },
+    // ];
   }
 })();

@@ -1,23 +1,27 @@
 <div flex class="nav-bar" layout="column" md-colors="::{background: 'default-accent-100'}">
   <md-toolbar flex="5" class="md-accent">
-    <p class="logged-in-user md-caption">{{user.displayName}}</p>
-    <p class="md-caption logged-in-user">{{user.email}}</p>
-    <md-button md-whiteframe="1" ng-click="LogOut()">Log Out</md-button>
+    <p class="logged-in-user md-caption">{{$ctrl.user.displayName}}</p>
+    <p class="md-caption logged-in-user">{{$ctrl.user.email}}</p>
+    <md-button md-whiteframe="1" ng-click="$ctrl.LogOut()">Log Out</md-button>
   </md-toolbar>
 
-  <md-toolbar flex="10" layout-align="" class="md-accent">
-    <md-button md-whiteframe="1" ng-click="Admin();">
+  <md-toolbar ng-if="$ctrl.userDetails.admin" flex="10" layout-align="" class="md-accent">
+    <md-button md-whiteframe="1" ng-click="$ctrl.Admin();">
       <h3>Project Admin</h3>
     </md-button>
   </md-toolbar>
 
   <md-toolbar flex="25" layout="column" class="md-accent">
+    <md-divider></md-divider>
     <h1 class="md-title">Projects</h1>
     <md-input-container class="md-block">
       <label>Sort By</label>
       <md-select ng-model="orderProp">
-        <md-option value="name">Name</md-option>
-        <md-option value="age">Age</md-option>
+        <md-option value="displayName">Name</md-option>
+        <md-option value="creationDate">Creation Date</md-option>
+        <md-option value="launchDate">Launch Date</md-option>
+        <md-option value="shutDownDate">Shutdown Date</md-option>
+        <md-option value="client.displayName">Client</md-option>
       </md-select>
     </md-input-container>
     <md-input-container class="md-block">
@@ -28,12 +32,16 @@
 
   <div flex class="project-list">
     <md-list class="md-dense">
-      <md-list-item ng-repeat="project in projects | filter:$ctrl.query | orderBy:orderProp">
-        <md-button flex class="md-primary" ng-href="#!/project/{{project.id}}">
-          <h3>{{project.name}}</h3>
-          <p>{{project.customer}}</p>
+      <md-list-item ng-repeat="project in $ctrl.projects | orderBy:orderProp | filter:$ctrl.query as results">
+        <md-button flex class="md-primary md-raised animate-repeat project-list-button" ng-href="#!/project/{{project.projectId}}">
+          <h3 class="md-subhead">{{project.displayName}}</h3>
+          <p class="md-caption">{{project.client.displayName}}</p>
         </md-button>
       </md-list-item>
+      <md-list-item class="md-primary animate-repeat" ng-if="results.length === 0">
+        <h3><strong>No projects found...</strong></h3>
+      </md-list-item>
+    </li>
     </md-list>
   </div>
 </div>

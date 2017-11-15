@@ -7,14 +7,14 @@
     <form layout="column" layout-align="center center">
       <md-input-container>
         <label>Email</label>
-        <input ng-keyup="$event.keyCode == 13 && Login()" ng-model="email" type="email">
+        <input ng-keyup="$event.keyCode == 13 && $ctrl.Login()" ng-model="$ctrl.email" type="email">
       </md-input-container>
       <md-input-container>
         <label>Password</label>
-        <input ng-keyup="$event.keyCode == 13 && Login()" ng-model="password" type="password">
+        <input ng-keyup="$event.keyCode == 13 && $ctrl.Login()" ng-model="$ctrl.password" type="password">
       </md-input-container>
-      <md-button ng-click="Login()" class="md-raised md-accent">Login</md-button>
-      <p ng-if="error" md-colors="{color: 'warn-500'}" class="md-warn">{{error}}</p>
+      <md-button ng-click="$ctrl.Login()" class="md-raised md-accent">Login</md-button>
+      <p ng-if="$ctrl.error" md-colors="{color: 'warn-500'}" class="md-warn">{{$ctrl.error}}</p>
     </form>
   </div>
 </div>

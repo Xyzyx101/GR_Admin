@@ -12,21 +12,26 @@
 
   /* @ngInject */
   function LoginController($scope, $location, Auth) {
-    $scope.error = '';
-    $scope.email = '';
-    $scope.password = '';
+    var self = this;
+    this.error = '';
+    this.email = '';
+    this.password = '';
 
-    $scope.Login = function() {
-      Auth.Login($scope.email, $scope.password);
+  this.Login = function() {
+      Auth.Login(this.email, this.password)
+      .then(function(user){
+        if(user!=null) {
+            $location.path('/home');
+        }
+      }).catch(function(err){
+        self.error = err.message;
+      });
     };
     $scope.$on("Auth:StateChanged", function() {
-      $scope.user = Auth.User();
-      if($scope.user.authenticated) {
-          $location.path('/home');
+      var user = Auth.User();
+      if(user==null) {
+        $location.path('/home');
       }
-    });
-    $scope.$on("Auth:Error", function(error) {
-      $scope.error = Auth.AuthError();
     });
   }
 })();
