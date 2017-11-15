@@ -2,7 +2,7 @@
   "option-master-list" : [],
   "projects" : [
     {
-      "projectId" : "test-project",
+      "id" : "test-project",
       "customer" : "test-company",
       "name" : "Bacon",
       "admins" : [

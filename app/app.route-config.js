@@ -34,7 +34,7 @@
         }
       }
     })
-    .when('/project/:projectId', {
+    .when('/project/:id', {
       template: '<project></project>',
       resolve: {
         currentAuth: function(Auth) {

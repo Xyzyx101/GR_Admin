@@ -1,5 +1,5 @@
 {
-  "ProjectID" : "AvalonTowns",
+  "id" : "AvalonTowns",
   "ProjectDisplayText" : "Avalon Urban Towns",
   "Selections" : {
     "_comment" : "This is used for global project options",

@@ -8,16 +8,15 @@
     controller: ManageProjectsController
   });
 
-  ManageProjectsController.$inject = ['$scope'];
+  ManageProjectsController.$inject = ['$scope', 'ProjectList'];
 
   /* @ngInject */
-  function ManageProjectsController($scope) {
+  function ManageProjectsController($scope, ProjectList) {
+    var self = this;
     var today = new Date();
     var year = today.getFullYear();
     var month = today.getMonth();
     var day = today.getDate();
-    var x = new Date(year, month + 3, day);
-    var y = new Date(year + 1, month, day);
     $scope.project = {
       id: '',
       displayName: '',
@@ -40,6 +39,9 @@
         },
       }
     };
+    this.createEnabled = false;
+    this.projectAdminId = '';
+
     $scope.$watch('project.displayName', updateProjectId);
     $scope.$watch('project.client.displayName', updateProjectId);
     function updateProjectId(newValue, oldValue) {
@@ -50,9 +52,47 @@
         newId = $scope.project.displayName;
       } else {
         newId = $scope.project.client.displayName + '-' +  $scope.project.displayName;
+        self.createEnabled = true;
       }
       $scope.project.id = newId.toLowerCase().replace(/\ /g, '_').replace(/\'/g, '');
+      self.projectMessage = '';
+      self.projectError = '';
+    }
+
+    this.deleteEnabled = false;
+    $scope.projectIdToDelete = '';
+    $scope.$watch('projectIdToDelete', updateProjectToDelete);
+    function updateProjectToDelete(newValue, oldValue) {
+      self.deleteEnabled = ($scope.projectIdToDelete != '');
+      self.deleteMessage = '';
+      self.deleteError = '';
+    }
+
+    this.projectMessage = '';
+    this.projectError = '';
+    this.CreateProject = function() {
+      ProjectList.CreateProject($scope.project)
+      .then(function(result){
+        self.projectMessage = result;
+        self.projectError = '';
+      }).catch(function(err){
+        self.projectMessage = '';
+        self.projectError = err.message;
+      })
+    }
+
+    this.deleteMessage = '';
+    this.deleteError = '';
+    this.DeleteProject = function() {
+      ProjectList.DeleteProject($scope.projectIdToDelete)
+      .then(function(result){
+        self.deleteMessage = result;
+        self.deleteError = '';
+      }).catch(function(err){
+        self.deleteMessage = '';
+        self.deleteError = err.message;
+      })
+      $scope.projectIdToDelete = '';
     }
   }
-
 })();

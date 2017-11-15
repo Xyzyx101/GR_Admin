@@ -43,6 +43,9 @@
       })
     }
     updateProjects();
+    $scope.$on("ProjectList:Updated", function() {
+      updateProjects();
+    });
     //this.projects = ProjectList.GetList(this.user);
     // this.projects = [
     //   {

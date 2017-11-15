@@ -75,18 +75,21 @@
         </md-input-container>
       </div>
     </div>
-    <div flex="10" layout="row" layout-align="center" layout-padding>
-      <md-button class="md-raised md-primary">Create</md-button>
+    <div flex layout="column" layout-align="center" ng-if="$ctrl.projectError || $ctrl.projectMessage">
+      <p ng-if="$ctrl.projectError" md-colors="{color: 'warn-500'}" class="md-warn">{{$ctrl.projectError}}</p>
+      <p ng-if="$ctrl.projectMessage" md-colors="{color: 'primary-500'}" class="md-primary">{{$ctrl.projectMessage}}</p>
     </div>
-    <!-- </fieldset> -->
+    <div flex="10" layout="row" layout-align="center" layout-padding>
+      <md-button ng-click="$ctrl.CreateProject()" class="md-raised md-primary" ng-disabled="!$ctrl.createEnabled">Create</md-button>
+    </div>
   </div>
   <div flex layout="column">
     <div flex="65" layout="column" layout-margin layout-padding md-whiteframe="5">
       <h1 class="md-display-1" md-colors="{background: 'accent'}">Administrators</h1>
       <div flex layout="column">
         <md-input-container layout-margin layout-padding class="md-block">
-          <label>ProjectId</label>
-          <input ng-model="project.id">
+          <label>ID</label>
+          <input ng-model="$ctrl.projectAdminId">
         </md-input-container>
       </div>
       <div flex layout="row" layout-padding>
@@ -109,12 +112,16 @@
       <h1 class="md-display-1" md-colors="{background: 'accent'}">Delete Project</h1>
       <div flex layout="column">
         <md-input-container layout-margin layout-padding class="md-block">
-          <label>ProjectId</label>
+          <label>ID</label>
           <input ng-model="projectIdToDelete">
         </md-input-container>
       </div>
+      <div flex layout="column" layout-align="center" ng-if="$ctrl.deleteError || $ctrl.deleteMessage">
+        <p ng-if="$ctrl.deleteError" md-colors="{color: 'warn-500'}" class="md-warn">{{$ctrl.deleteError}}</p>
+        <p ng-if="$ctrl.deleteMessage" md-colors="{color: 'primary-500'}" class="md-primary">{{$ctrl.deleteMessage}}</p>
+      </div>
       <div flex layout="row" layout-align="center" layout-margin layout-padding>
-        <md-button class="md-raised md-warn">Delete Project</md-button>
+        <md-button ng-click="$ctrl.DeleteProject()" class="md-raised md-warn" ng-disabled="!$ctrl.deleteEnabled">Delete Project</md-button>
       </div>
     </div>
   </div>

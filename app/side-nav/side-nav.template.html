@@ -33,7 +33,7 @@
   <div flex class="project-list">
     <md-list class="md-dense">
       <md-list-item ng-repeat="project in $ctrl.projects | orderBy:orderProp | filter:$ctrl.query as results">
-        <md-button flex class="md-primary md-raised animate-repeat project-list-button" ng-href="#!/project/{{project.projectId}}">
+        <md-button flex class="md-primary md-raised animate-repeat project-list-button" ng-href="#!/project/{{project.id}}">
           <h3 class="md-subhead">{{project.displayName}}</h3>
           <p class="md-caption">{{project.client.displayName}}</p>
         </md-button>
