@@ -86,3 +86,30 @@
 .project-list-button h3,p {
   margin:0px;
 }
+
+.animate-project-list {
+  max-height: 60px;
+  min-height: 48px;
+}
+
+.animate-project-list.ng-move,
+.animate-project-list.ng-enter,
+.animate-project-list.ng-leave {
+  transition:all ease 0.35s;
+}
+
+.animate-project-list.ng-leave.ng-leave-active,
+.animate-project-list.ng-move,
+.animate-project-list.ng-enter {
+  opacity:0;
+  max-height: 0px;
+  min-height: 0px;
+}
+
+.animate-project-list.ng-leave,
+.animate-project-list.ng-move.ng-move-active,
+.animate-project-list.ng-enter.ng-enter-active {
+  opacity:1;
+  max-height: 60px;
+  min-height: 48px;
+}

@@ -32,13 +32,13 @@
 
   <div flex class="project-list">
     <md-list class="md-dense">
-      <md-list-item ng-repeat="project in $ctrl.projects | orderBy:orderProp | filter:$ctrl.query as results">
-        <md-button flex class="md-primary md-raised animate-repeat project-list-button" ng-href="#!/project/{{project.id}}">
+      <md-list-item class="animate-project-list" ng-repeat="project in $ctrl.projects | orderBy:orderProp | filter:$ctrl.query as results">
+        <md-button flex class="md-primary md-raised project-list-button" ng-href="#!/project/{{project.id}}">
           <h3 class="md-subhead">{{project.displayName}}</h3>
           <p class="md-caption">{{project.client.displayName}}</p>
         </md-button>
       </md-list-item>
-      <md-list-item class="md-primary animate-repeat" ng-if="results.length === 0">
+      <md-list-item class="md-primary animate-project-list" ng-if="results.length === 0">
         <h3><strong>No projects found...</strong></h3>
       </md-list-item>
     </li>
