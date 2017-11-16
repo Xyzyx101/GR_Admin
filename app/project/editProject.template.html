@@ -1,0 +1,86 @@
+<div class="manage-projects-container" flex layout="row" ng-cloak>
+  <div flex layout="column" layout-margin layout-padding md-whiteframe="5">
+    <h2 flex="10" md-colors="{background: 'accent'}"><span class="md-headline">Edit : {{$ctrl.project.displayName}} -- {{$ctrl.project.client.displayName}}</span></h2>
+    <!-- <fieldset class="fieldset-standard"> -->
+    <md-input-container flex="5" class="md-block">
+      <label>Project ID</label>
+      <input ng-model="$ctrl.project.id" disabled>
+    </md-input-container>
+    <div flex="8" layout="row">
+      <md-input-container flex="60" class="md-block">
+        <label>Display Name</label>
+        <input ng-model="$ctrl.project.displayName">
+      </md-input-container>
+      <md-input-container  flex="40" class="md-block">
+        <label>Client Name</label>
+        <input ng-model="$ctrl.project.client.displayName">
+      </md-input-container>
+    </div>
+    <div flex="12" layout="row">
+      <md-input-container flex>
+        <label>Creation Date</label>
+        <md-datepicker ng-model="$ctrl.project.creationDate"></md-datepicker>
+      </md-input-container>
+      <md-input-container flex>
+        <label>Launch Date</label>
+        <md-datepicker ng-model="$ctrl.project.launchDate"></md-datepicker>
+      </md-input-container>
+      <md-input-container flex>
+        <label>Complete Date</label>
+        <md-datepicker ng-model="$ctrl.project.shutdownDate"></md-datepicker>
+      </md-input-container>
+    </div>
+    <md-divider></md-divider>
+    <div flex="45" layout="row">
+      <div flex layout="column">
+        <div class="form-label">Project Address</div>
+        <md-input-container class="md-block" flex>
+          <input ng-model="$ctrl.project.address.line1" placeholder="Address 1">
+        </md-input-container>
+        <md-input-container class="md-block" flex>
+          <input ng-model="$ctrl.project.address.line2" placeholder="Address 2">
+        </md-input-container>
+        <md-input-container class="md-block" flex>
+          <label>City</label>
+          <input ng-model="$ctrl.project.address.city">
+        </md-input-container>
+        <md-input-container class="md-block" flex>
+          <label>Province</label>
+          <md-select ng-model="$ctrl.project.address.province">
+            <md-option ng-repeat="province in $ctrl.provinces" value="{{province}}">
+              {{province}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+      <div flex layout="column">
+        <div class="form-label">Client Address</div>
+        <md-input-container class="md-block" flex>
+          <input ng-model="$ctrl.project.client.address.line1" placeholder="Address 1">
+        </md-input-container>
+        <md-input-container class="md-block" flex>
+          <input ng-model="$ctrl.project.client.address.line2" placeholder="Address 2">
+        </md-input-container>
+        <md-input-container class="md-block" flex>
+          <label>City</label>
+          <input ng-model="$ctrl.project.client.address.city">
+        </md-input-container>
+        <md-input-container class="md-block" flex>
+          <label>Province</label>
+          <md-select ng-model="$ctrl.project.client.address.province">
+            <md-option ng-repeat="province in $ctrl.provinces" value="{{province}}">
+              {{province}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+    </div>
+    <div flex layout="column" layout-align="center" ng-if="$ctrl.error || $ctrl.message">
+      <p ng-if="$ctrl.error" md-colors="{color: 'warn-500'}" class="md-warn">{{$ctrl.error}}</p>
+      <p ng-if="$ctrl.message" md-colors="{color: 'primary-500'}" class="md-primary">{{$ctrl.message}}</p>
+    </div>
+    <div flex="10" layout="row" layout-align="center" layout-padding>
+      <md-button ng-click="$ctrl.SaveProject()" class="md-raised md-primary">Save Changes</md-button>
+    </div>
+  </div>
+</div>

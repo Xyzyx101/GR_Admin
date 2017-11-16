@@ -5,10 +5,10 @@
   .module('grFirebase')
   .factory('ProjectList', ProjectList);
 
-  ProjectList.$inject = ['$q', '$rootScope', 'Auth'];
+  ProjectList.$inject = ['$q', '$rootScope', 'Auth', 'Cleaner'];
 
   /* @ngInject */
-  function ProjectList($q, $rootScope, Auth) {
+  function ProjectList($q, $rootScope, Auth, Cleaner) {
     function getList() {
       let userDetails = Auth.UserDetails();
       if(userDetails.admin) {
@@ -75,6 +75,35 @@
       return deferred.promise;
     }
 
+    function getProject(id) {
+      var deferred = $q.defer();
+      firebase.database().ref('/projects/' + id).once('value')
+      .then(function(snapshot) {
+        if(snapshot && snapshot.val()) {
+          let project = snapshot.val();
+          project.id = id;
+          project = changeTimestampsToDates(project);
+          deferred.resolve(project);
+        }
+      }).catch(function(err) {
+        deferred.reject(err);
+      })
+      return deferred.promise;
+    }
+
+    function changeTimestampsToDates(proj) {
+      if(proj.creationDate) {
+        proj.creationDate = new Date(proj.creationDate);
+      }
+      if(proj.launchDate) {
+        proj.launchDate = new Date(proj.launchDate);
+      }
+      if(proj.shutdownDate) {
+        proj.shutdownDate = new Date(proj.shutdownDate);
+      }
+      return proj;
+    }
+
     function createProject(proj) {
       var deferred = $q.defer();
       firebase.database().ref('/projects/' + proj.id).once('value')
@@ -92,6 +121,7 @@
       var deferred = $q.defer();
       const id = proj.id;
       delete proj.id;
+      proj = Cleaner.ConvertDatesToTimestamps(proj);
       firebase.database().ref('/projects/'+id).set(proj)
       .then(function() {
         deferred.resolve(id + ' has been saved');
@@ -127,11 +157,40 @@
       return deferred.promise;
     }
 
+    function  getConfig(id) {
+      var deferred = $q.defer();
+      firebase.database().ref('/projectConfig/'+id).orderByKey().limitToLast(1).once('value')
+      .then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          deferred.resolve(childSnapshot.val());
+        });
+      }).catch(function(err){
+        deferred.reject(err);
+      })
+      return deferred.promise;
+    }
+
+    function saveConfig(id, config) {
+      var deferred = $q.defer();
+      var configRef = firebase.database().ref('/projectConfig/'+id);
+      var newConfig = configRef.push();
+      newConfig.set(config)
+      .then(function() {
+        deferred.resolve('Project config for ' + id + ' saved');
+      }).catch(function(err) {
+        deferred.reject(err);
+      });
+      return deferred.promise;
+    }
+
     return  {
       GetList: getList,
       CreateProject: createProject,
+      GetProject: getProject,
       SaveProject: saveProject,
-      DeleteProject: deleteProject
+      DeleteProject: deleteProject,
+      GetProjectConfig: getConfig,
+      SaveProjectConfig: saveConfig
     };
   }
 })();

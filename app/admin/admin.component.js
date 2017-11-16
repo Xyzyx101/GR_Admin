@@ -8,10 +8,9 @@
     controller: AdminController
   });
 
-  AdminController.$inject = [];
+  AdminController.$inject = ['$scope'];
 
   /* @ngInject */
-  function AdminController() {
-    
+  function AdminController($scope) {
   }
 })();

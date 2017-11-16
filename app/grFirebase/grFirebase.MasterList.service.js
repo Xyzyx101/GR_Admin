@@ -19,7 +19,6 @@
         });
       });
     }
-    download();
 
     function upload(newList) {
       // Clean will remove the junk properties that ui-grid shoves into the data.

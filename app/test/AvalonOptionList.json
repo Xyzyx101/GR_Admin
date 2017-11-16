@@ -1,0 +1,44 @@
+{
+	"OptionList": [
+		{
+			"AssetName": "ModO_Kitchen_Island_Cruz",
+			"OptionType": "ModelOption",
+			"OptionID": "/Game/GR_Prototype/Options/Model/ModO_Kitchen_Island_Cruz.ModO_Kitchen_Island_Cruz_C",
+			"OptionDisplayName": "Cruz Island",
+			"TechnicalName": "",
+			"Collection": "",
+			"Vendor": "",
+			"Category": "Kitchen Island"
+		},
+		{
+			"AssetName": "ModO_Kitchen_Island_Kai",
+			"OptionType": "ModelOption",
+			"OptionID": "/Game/GR_Prototype/Options/Model/ModO_Kitchen_Island_Kai.ModO_Kitchen_Island_Kai_C",
+			"OptionDisplayName": "Kai Island",
+			"TechnicalName": "",
+			"Collection": "",
+			"Vendor": "",
+			"Category": "Kitchen Island"
+		},
+		{
+			"AssetName": "ModO_Kitchen_Island_Lyra",
+			"OptionType": "ModelOption",
+			"OptionID": "/Game/GR_Prototype/Options/Model/ModO_Kitchen_Island_Lyra.ModO_Kitchen_Island_Lyra_C",
+			"OptionDisplayName": "Lyra Island",
+			"TechnicalName": "",
+			"Collection": "",
+			"Vendor": "",
+			"Category": "Kitchen Island"
+		},
+		{
+			"AssetName": "ModO_Kitchen_Island_None",
+			"OptionType": "ModelOption",
+			"OptionID": "/Game/GR_Prototype/Options/Model/ModO_Kitchen_Island_None.ModO_Kitchen_Island_None_C",
+			"OptionDisplayName": "No Island",
+			"TechnicalName": "",
+			"Collection": "",
+			"Vendor": "",
+			"Category": "Kitchen Island"
+		}
+	]
+}

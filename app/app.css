@@ -95,7 +95,7 @@
 .animate-project-list.ng-move,
 .animate-project-list.ng-enter,
 .animate-project-list.ng-leave {
-  transition:all ease 0.35s;
+  transition:max-height ease-in 0.5s, min-height ease-in 0.5s, opacity 0.15s ease-in 0.35s;
 }
 
 .animate-project-list.ng-leave.ng-leave-active,

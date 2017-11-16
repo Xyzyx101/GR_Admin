@@ -13,6 +13,7 @@
   /* @ngInject */
   function ManageProjectsController($scope, ProjectList) {
     var self = this;
+    this.provinces = ['Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 'Newfoundland', 'Nova Scotia', 'Ontario', 'Prince Edward Island', 'Quebec', 'Saskatchewan'];
     var today = new Date();
     var year = today.getFullYear();
     var month = today.getMonth();

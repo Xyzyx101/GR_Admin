@@ -2,22 +2,24 @@
   'use strict';
 
   angular
-  .module('admin')
-  .component('masterList', {
+  .module('project')
+  .component('projectMasterList', {
     templateUrl: 'admin/masterList.template.html',
-    controller: MasterListController
-  })
+    controller: ProjectMasterListController
+  });
 
-/* Be careful with changes to this controller.  The project list controller is very similar but
-varies enough to make using the same component difficult.  Both components use the same template */
+  /* Be careful with changes to this controller.  The master list controller is very similar but
+  varies enough to make using the same component difficult.  Both components use the same template */
 
-  MasterListController.$inject = ['$scope', '$q', '$window', 'MasterList', 'FileSaver', 'Blob'];
+  ProjectMasterListController.$inject = ['$scope', '$q', '$window', 'ProjectMasterList', 'FileSaver', 'Blob'];
 
   /* @ngInject */
-  function MasterListController($scope, $q, $window, MasterList, FileSaver, Blob) {
-    MasterList.Download();
-    $scope.$on("MasterList:Changed", function() {
-      $scope.masterList = MasterList.GetList() || {'OptionList' : {}};
+  function ProjectMasterListController($scope, $q, $window, ProjectMasterList, FileSaver, Blob) {
+    var self = this;
+    this.id = $scope.$parent.id;
+    ProjectMasterList.Download(this.id);
+    $scope.$on("ProjectMasterList:Changed", function() {
+      $scope.masterList = ProjectMasterList.GetList(self.id) || {'OptionList' : {}};
       $scope.gridOptions.data = $scope.masterList['OptionList'];
     });
 
@@ -41,13 +43,13 @@ varies enough to make using the same component difficult.  Both components use t
       var file = new Blob([ json ], {
         type : 'application/json'
       });
-      FileSaver.saveAs(file, 'MasterOptionList.json');
+      FileSaver.saveAs(file, '' + self.id + '-OptionList.json');
     }
 
     $scope.uploadFile = null;
     $scope.uploadEnabled = false;
     $scope.uploadList = function() {
-      MasterList.Upload($scope.masterList);
+      ProjectMasterList.Upload(self.id, $scope.masterList);
     }
     $scope.loadFile = function(file) {
       readJsonData(file)

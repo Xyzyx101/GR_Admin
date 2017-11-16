@@ -13,7 +13,8 @@
   /* @ngInject */
   function Cleaner($log) {
     return {
-      Clean : clean
+      Clean : clean,
+      ConvertDatesToTimestamps: convertDatesToTimestamps
     };
 
     function clean(obj) {
@@ -39,6 +40,28 @@
           } else {
             cleanObj[key] = clean(obj[key]);
           }
+        }
+        return cleanObj;
+      }
+    }
+
+    function convertDatesToTimestamps(obj) {
+      if (obj === null || typeof(obj) !== 'object')
+      return obj;
+
+      if (obj instanceof Date) {
+        return obj.getTime();
+      } else if (obj instanceof Array) {
+        var cleanArray = []
+        for(var i=0; i<obj.length; ++i) {
+          cleanArray.push(convertDatesToTimestamps(obj[i]));
+        }
+        return cleanArray;
+      }  else {
+        var cleanObj = {};
+        for (var key in obj) {
+          if(!obj.hasOwnProperty(key)) { continue; };
+          cleanObj[key] = convertDatesToTimestamps(obj[key]);
         }
         return cleanObj;
       }

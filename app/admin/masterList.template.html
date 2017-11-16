@@ -1,16 +1,16 @@
 <div flex layout="row" layout-padding layout-align="center center"  ng-cloak>
   <div md-whiteframe="1" layout-margin layout-padding>
     <fieldset class="fieldset-standard">
-      <legend md-colors="{color:'primary'}">Backup Master List</legend>
-      <md-button ng-click="saveMasterList();" class="md-raised md-primary">Save Backup</md-button>
+      <legend md-colors="{color:'primary'}">Backup List</legend>
+      <md-button ng-click="saveList();" class="md-raised md-primary">Save Backup</md-button>
       <md-checkbox md-no-ink ng-model="prettyJson" class="md-primary">Pretty Print</md-checkbox>
     </fieldset>
   </div>
   <div md-whiteframe="1" layout-margin layout-padding>
     <fieldset class="fieldset-standard">
-      <legend md-colors="{color:'primary'}">Upload New Master List</legend>
-      <md-button ng-click="uploadMasterList();" class="md-raised md-primary" ng-disabled="!uploadEnabled">Upload</md-button>
-      <input type="file" id="upload-list" gr-file-select />
+      <legend md-colors="{color:'primary'}">Upload New List</legend>
+      <md-button ng-click="uploadList();" class="md-raised md-primary" ng-disabled="!uploadEnabled">Upload</md-button>
+      <input type="file" id="upload-list" file-select />
     </fieldset>
   </div>
 </div>

@@ -57,7 +57,7 @@ describe('Project Service', function() {
     it('should return a Delete promise', inject(function(ProjectList) {
       expect(ProjectList.DeleteProject).toBeDefined();
       expect(typeof(ProjectList.DeleteProject) == 'function').toBe(true);
-      var promise = ProjectList.DeleteProject(regularUser);
+      var promise = ProjectList.DeleteProject(null);
       expect(promise).toBeDefined();
       expect(promise.constructor.name).toBe('Promise');
     }));
