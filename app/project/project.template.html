@@ -1,6 +1,12 @@
 <div flex layout="row" ng-cloak>
   <side-nav flex="nogrow" class="side-nav"></side-nav>
   <div flex layout="column" layout-align="start top">
+    <md-toolbar class="md-primary md-toolbar-tools" flex layout-align="center center">
+      <h1>
+        <span class="md-headline">{{$ctrl.project.displayName}}</span>
+        <span class="md-subhead">&emsp;{{$ctrl.project.client.displayName}}</span>
+      </h1>
+    </md-toolbar>
     <md-tabs class="md-accent" md-dynamic-height>
       <md-tab>
         <md-tab-label>

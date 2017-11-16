@@ -1,22 +1,22 @@
-<div flex class="nav-bar" layout="column" md-colors="::{background: 'default-accent-100'}">
-  <md-toolbar flex="5" class="md-accent">
+<div flex class="nav-bar" layout="column" md-colors="::{background: 'primary'}">
+  <md-toolbar flex="5" class="md-primary">
     <p class="logged-in-user md-caption">{{$ctrl.user.displayName}}</p>
     <p class="md-caption logged-in-user">{{$ctrl.user.email}}</p>
-    <md-button md-whiteframe="1" ng-click="$ctrl.LogOut()">Log Out</md-button>
+    <md-button class="md-raised md-accent" md-whiteframe="1" ng-click="$ctrl.LogOut()">Log Out</md-button>
   </md-toolbar>
 
-  <md-toolbar ng-if="$ctrl.userDetails.admin" flex="10" layout-align="" class="md-accent">
-    <md-button md-whiteframe="1" ng-click="$ctrl.Admin();">
-      <h3>Project Admin</h3>
+  <md-toolbar ng-if="$ctrl.userDetails.admin" flex="10" layout-align="" class="md-primary">
+    <md-button class="md-raised md-accent" md-whiteframe="1" ng-click="$ctrl.Admin();">
+      Project Admin
     </md-button>
   </md-toolbar>
 
-  <md-toolbar flex="25" layout="column" class="md-accent">
+  <md-toolbar flex="20" layout="column" class="md-primary">
     <md-divider></md-divider>
     <h1 class="md-title">Projects</h1>
-    <md-input-container class="md-block">
+    <md-input-container class="side-nav-input-container md-block">
       <label>Sort By</label>
-      <md-select ng-model="orderProp">
+      <md-select md-colors="::{background: 'accent'}" ng-model="orderProp">
         <md-option value="displayName">Name</md-option>
         <md-option value="creationDate">Creation Date</md-option>
         <md-option value="launchDate">Launch Date</md-option>
@@ -24,16 +24,16 @@
         <md-option value="client.displayName">Client</md-option>
       </md-select>
     </md-input-container>
-    <md-input-container class="md-block">
+    <md-input-container class="side-nav-input-container md-block">
       <label>Search</label>
-      <input type="text" ng-model="$ctrl.query">
+      <input md-colors="::{background: 'accent'}" type="text" ng-model="$ctrl.query">
     </md-input-container>
   </md-toolbar>
 
   <div flex class="project-list">
     <md-list class="md-dense">
-      <md-list-item-text class="animate-project-list" ng-repeat="project in $ctrl.projects | orderBy:orderProp | filter:$ctrl.query as results">
-        <md-button class="md-primary md-raised project-list-button" ng-href="#!/project/{{project.id}}">
+      <md-list-item-text flex layout="column" class="animate-project-list" ng-repeat="project in $ctrl.projects | orderBy:orderProp | filter:$ctrl.query as results">
+        <md-button class="md-accent md-raised project-list-button" ng-href="#!/project/{{project.id}}">
           <h3 class="md-subhead">{{project.displayName}}</h3>
           <p class="md-caption">{{project.client.displayName}}</p>
         </md-button>

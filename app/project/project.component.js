@@ -8,10 +8,16 @@
     controller: ProjectController,
   });
 
-  ProjectController.$inject = ['$routeParams', '$scope'];
+  ProjectController.$inject = ['$routeParams', '$scope', 'ProjectList'];
 
   /* @ngInject */
-  function ProjectController($routeParams, $scope) {
+  function ProjectController($routeParams, $scope, ProjectList) {
+    var self = this;
+    self.project = {};
     $scope.id = $routeParams.id;
+    ProjectList.GetProject($scope.id)
+    .then(function(project) {
+      self.project = project;
+    });
   }
 })();

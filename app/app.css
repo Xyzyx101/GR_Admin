@@ -36,7 +36,7 @@
 }
 
 .project-list {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .logo {
@@ -84,7 +84,7 @@
 }
 
 .project-list-button {
-  width:95%;
+  min-width:95%;
 }
 
 .project-list-button h3,p {
@@ -100,7 +100,7 @@
 .animate-project-list.ng-move,
 .animate-project-list.ng-enter,
 .animate-project-list.ng-leave {
-  transition:max-height ease-in 0.5s, min-height ease-in 0.5s, opacity 0.15s ease-in 0.35s;
+  transition:max-height ease-in 0.5s, min-height ease-in 0.5s, opacity ease-out 0.5s;
 }
 
 .animate-project-list.ng-leave.ng-leave-active,
@@ -117,4 +117,8 @@
   opacity:1;
   max-height: 60px;
   min-height: 48px;
+}
+
+.side-nav-input-container {
+  margin: 6px;
 }
