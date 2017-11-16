@@ -83,8 +83,13 @@
   height: 80%;
 }
 
+.project-list-button {
+  width:95%;
+}
+
 .project-list-button h3,p {
   margin:0px;
+  padding:0px;
 }
 
 .animate-project-list {

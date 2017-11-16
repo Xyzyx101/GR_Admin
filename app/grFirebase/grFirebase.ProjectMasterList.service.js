@@ -12,7 +12,6 @@
     var list = {"OptionList": []};
 
     function download(projectId) {
-      console.log('download:'+projectId);
       firebase.database().ref('/projectMasterList/'+projectId+'/').orderByKey().limitToLast(1).once('value', function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
           list =  childSnapshot.val();
@@ -22,9 +21,8 @@
     }
 
     function upload(projectId, newList) {
-      console.log('upload:'+projectId);
       $rootScope.$broadcast("ProjectMasterList:Changed");
-    
+
       // Clean will remove the junk properties that ui-grid shoves into the data.
       newList = Cleaner.Clean(newList);
       var masterListRef = firebase.database().ref('/projectMasterList/'+projectId+'/');
@@ -40,7 +38,6 @@
       }
 
     function getList(projectId) {
-        console.log('getList:'+projectId);
       return list;
     }
 
