@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('project', ['sideNav', 'grFirebase', 'FileSelect', 'ui.grid', 'ui.grid.resizeColumns']);
+        .module('project', ['sideNav', 'grFirebase', 'FileSelect', 'infoConsole', 'ui.grid', 'ui.grid.resizeColumns', 'ui.grid.selection']);
 })();

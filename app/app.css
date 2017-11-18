@@ -122,3 +122,26 @@
 .side-nav-input-container {
   margin: 6px;
 }
+
+.configure-tab-container {
+  height:725px;
+}
+
+.fixture-option-list-grid {
+  height: 300px;
+}
+
+md-list.md-dense .fixture-list-item {
+  min-width:95%;
+  min-height: 25px;
+  height: 25px;
+}
+
+.fixture-list-item>* {
+  margin:0px;
+  padding:2px;
+}
+
+.save-screen-container{
+  height:500px;
+}

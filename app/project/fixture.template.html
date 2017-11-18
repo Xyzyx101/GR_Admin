@@ -1,0 +1,68 @@
+<div class="configure-tab-container" layout="column" ng-cloak>
+  <div flex="60" layout="row">
+    <div flex="25" layout="column" layout-margin md-whiteframe="5">
+      <h1  flex="15" class="md-headline" md-colors="{background: 'accent'}" layout-padding>Fixture List</h1>
+      <md-content flex="70">
+        <div flex class="fixture-list" layout="column">
+          <md-list flex class="md-dense">
+            <md-list-item flex class="fixture-list-item" ng-repeat="fixture in $parent.config.fixtures">
+              <md-subhead flex ng-click="$ctrl.selectFixture(fixture)" md-colors="fixture.id==$ctrl.selectedFixture.id ? {background: 'accent'} : {background: 'background'}">{{fixture.displayText}}</md-subhead>
+            </md-list-item>
+            <md-list-item ng-if="!$parent.config.fixtures || $parent.config.fixtures.length==0">
+              <md-header>Press <span md-colors="{color: 'primary'}">Create Fixture</span> to add a fixture</md-header>
+            </md-list-item>
+          </md-list>
+        </div>
+      </md-content>
+      <div flex="15" layout="row" layout-align="center center" layout-padding>
+        <md-button ng-click="$ctrl.createFixture()" class="md-raised md-primary">Create Fixture</md-button>
+        <md-button ng-click="$ctrl.deleteFixture()" class="md-raised md-primary">Delete Fixture</md-button>
+      </div>
+    </div>
+    <div flex="25" layout="column" layout-margin md-whiteframe="5" ng-if="$ctrl.selectedFixture!=null">
+      <h1 class="md-headline" flex="15" md-colors="{background: 'accent'}" layout-padding>Fixture Details</h1>
+      <div flex="85" layout="column">
+        <md-input-container flex class="md-block">
+          <label>Fixture ID</label>
+          <input ng-model="$ctrl.selectedFixture.id">
+        </md-input-container>
+        <md-input-container flex class="">
+          <label>Type</label>
+          <md-select ng-model="$ctrl.selectedFixture.type">
+            <md-option ng-repeat="type in $ctrl.fixtureTypes" value="{{type}}">
+              {{type}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container flex>
+          <label>Display Text</label>
+          <input ng-model="$ctrl.selectedFixture.displayText">
+        </md-input-container>
+        <md-input-container flex class="md-block">
+          <label>Category Text</label>
+          <input ng-model="$ctrl.selectedFixture.categoryText">
+        </md-input-container>
+        <div flex="20" layout="row">
+          <md-input-container flex class="md-block">
+            <label>Default Option</label>
+            <input ng-model="$ctrl.selectedFixture.defaultOption" disabled>
+          </md-input-container>
+          <md-button ng-click="$ctrl.setDefaultOption()" class="md-raised md-primary">Set Default</md-button>
+        </div>
+      </div>
+    </div>
+    <div flex="50" layout="column" layout-margin md-whiteframe="5" ng-if="$ctrl.selectedFixture!=null">
+      <h1 class="md-headline" flex="15" md-colors="{background: 'accent'}" layout-padding>Fixture Options</h1>
+      <md-content flex="70" layout="column">
+        <div id="grid2" ui-grid="$ctrl.fixtureGridOptions" class="fixture-option-list-grid" ui-grid-resize-columns ui-grid-selection></div>
+      </md-content>
+      <div flex="15" layout="row" layout-align="center center" layout-padding>
+        <md-button ng-click="$ctrl.addOptions()" class="md-raised md-primary">Add Options</md-button>
+        <md-button ng-click="$ctrl.removeOptions()" class="md-raised md-primary">Remove Options</md-button>
+      </div>
+    </div>
+  </div>
+  <div flex="40">
+    <div id="grid1" ui-grid="$ctrl.masterGridOptions" class="fixture-option-list-grid" ui-grid-resize-columns ui-grid-selection></div>
+  </div>
+</div>

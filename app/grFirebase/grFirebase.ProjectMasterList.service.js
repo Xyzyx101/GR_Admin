@@ -21,8 +21,6 @@
     }
 
     function upload(projectId, newList) {
-      $rootScope.$broadcast("ProjectMasterList:Changed");
-
       // Clean will remove the junk properties that ui-grid shoves into the data.
       newList = Cleaner.Clean(newList);
       var masterListRef = firebase.database().ref('/projectMasterList/'+projectId+'/');

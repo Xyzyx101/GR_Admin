@@ -26,6 +26,8 @@
     $scope.gridOptions = {
       enableFiltering: true,
       enableSorting: true,
+      rowHeight: 25,
+      showGridFooter:true,
       columnDefs: [
         { field: 'OptionID', enableHiding: false, cellTooltip: true, width: '10%', enableColumnResizing: true},
         { field: 'AssetName', enableHiding: false, cellTooltip: true, width: '20%', enableColumnResizing: true, enableFiltering: true },

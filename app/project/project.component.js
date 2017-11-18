@@ -13,8 +13,9 @@
   /* @ngInject */
   function ProjectController($routeParams, $scope, ProjectList) {
     var self = this;
-    self.project = {};
     $scope.id = $routeParams.id;
+
+    self.project = {};
     ProjectList.GetProject($scope.id)
     .then(function(project) {
       self.project = project;
