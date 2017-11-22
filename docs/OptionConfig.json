@@ -18,22 +18,18 @@
       {
         "id" : "Palette1",
         "displayText" : "Moderno",
-        "selection" :        {
-          "FixtureID" : "OptionID",
-          "WallColor" : "WhitePaint",
-          "Countertop" : "Granite"
-        },
-      },
-      {
-        "id" : "Palette2",
-      },
-    ],
-    "defaultPalette" : "PaletteID or the first one on the list if blank",
-    "_comment" : "ProjectOptions are options specific to a project that are not in the option master list",
-    "projectMasterList" : [
-      "SelectionOption.json",
-      "SelectionOption.json",
-      "SelectionOption.json",
-    ]
-  },
-}
+        "selections" : [
+          {
+            "fixtureId" : "wall-color",
+            "optionId" : "WhitePaint"
+            }, {
+              "fixtureId" : "kitchen-counter",
+              "optionId" : "Granite"
+            }
+          ],
+        }
+      ],
+      "defaultPalette" : "PaletteID or the first one on the list if blank",
+      "_comment" : "ProjectOptions are options specific to a project that are not in the option master list",
+    },
+  }

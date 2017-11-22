@@ -1,1 +1,78 @@
-<h1>Palette</h1>
+<div class="configure-tab-container" layout="column" ng-cloak>
+  <div flex="60" layout="row">
+    <div flex="25" layout="column" layout-margin md-whiteframe="5">
+      <h1  flex="15" class="md-headline" md-colors="{background: 'accent'}" layout-padding>Palette List</h1>
+      <md-content flex="70">
+        <div flex class="fixture-list" layout="column">
+          <md-list flex class="md-dense">
+            <md-list-item flex class="fixture-list-item" ng-repeat="palette in $parent.config.palettes">
+              <md-subhead flex ng-click="$ctrl.selectPalette(palette)" md-colors="palette.id==$ctrl.selectedPalette.id ? {background: 'accent'} : {background: 'background'}">{{palette.displayText}}</md-subhead>
+            </md-list-item>
+            <md-list-item ng-if="!$parent.config.palettes || $parent.config.palettes.length==0">
+              <md-header>Press <span md-colors="{color: 'primary'}">Create Palette</span> to add a palette</md-header>
+            </md-list-item>
+          </md-list>
+        </div>
+      </md-content>
+      <div flex="15" layout="row" layout-align="center center" layout-padding>
+        <md-button ng-click="$ctrl.createPalette()" class="md-raised md-primary">Create Palette</md-button>
+        <md-button ng-click="$ctrl.deletePalette()" class="md-raised md-primary">Delete Palette</md-button>
+      </div>
+    </div>
+    <div flex="25" layout="column" layout-margin md-whiteframe="5" ng-if="$ctrl.selectedPalette!=null">
+      <h1 class="md-headline" flex="15" md-colors="{background: 'accent'}" layout-padding>Palette Details</h1>
+        <div flex="85" layout="column">
+         <form flex layout="column" name="paletteConfig">
+           <md-input-container flex class="dense-form">
+             <label>Fixture ID</label>
+             <input name="id" ng-model="$ctrl.selectedPalette.id" required ng-pattern="/^[a-z\d-]+$/">
+             <div ng-messages="paletteConfig.id.$error">
+               <div ng-message="required">This is required</div>
+               <div ng-message="pattern">ID should contain only lowercase letters[a-z], numbers[0-9] and dashes[-]</div>
+             </div>
+           </md-input-container>
+           <md-input-container flex class="dense-form">
+             <label>Display Text</label>
+             <input ng-model="$ctrl.selectedPalette.displayText" name="displayText" required>
+             <div ng-messages="paletteConfig.displayText.$error">
+               <div ng-message="required">This is required</div>
+             </div>
+           </md-input-container>
+           <div flex="20" layout="row">
+             <md-input-container flex class="dense-form">
+               <label>Default Palette</label>
+               <input md-colors="{color: 'accent-700'}" ng-model="$ctrl.selectedPalette.default" disabled>
+             </md-input-container>
+             <md-button ng-click="$ctrl.setDefaultPalette()" class="md-raised md-primary">Make Palette Default</md-button>
+           </div>
+         </form>
+       </div>
+    </div>
+    <div flex="50" layout="column" layout-margin md-whiteframe="5" ng-if="$ctrl.selectedPalette!=null">
+      <h1  flex="15" class="md-headline" md-colors="{background: 'accent'}" layout-padding>Selection List</h1>
+      <pre>{{$ctrl.selectedPalette.selection | json}}</pre>
+      <md-content flex="70">
+        <div flex class="fixture-list" layout="column">
+          <md-list flex class="md-dense">
+            <md-list-item flex class="fixture-list-item" layout="row" layout-align="center center">
+              <md-title flex="40" class="md-title">Fixture</md-title>
+              <md-title flex="40" class="md-title">Option</md-title>
+              <md-title flex="20" class="md-title">Add/Remove</md-title>
+            </md-list-item>
+            <md-list-item flex class="fixture-list-item" ng-repeat="selection in $ctrl.selectedPalette.selections" layout-margin>
+              <md-subhead flex="40" class="md-subhead" ng-click="$ctrl.selectFixture(selection.fixture)" md-colors="selection.fixture.id==$ctrl.selectedFixture.id ? {background: 'accent'} : {background: 'background'}">{{selection.fixture.displayText}}</md-subhead>
+              <md-subhead flex="40" class="md-subhead" ng-click="$ctrl.selectFixture(selection.fixture)" md-colors="selection.fixture.id==$ctrl.selectedFixture.id ? {background: 'accent'} : {background: 'background'}">{{selection.option.OptionDisplayName}}</md-subhead>
+              <div flex="20" layout="row" layout-align="center center" layout-padding ng-if="selection.fixture.id==$ctrl.selectedFixture.id">
+                <md-button ng-click="$ctrl.addOption(selection)" class="palette-selection-button md-raised md-primary"><span class="md-caption">Add</span></md-button>
+                <md-button ng-click="$ctrl.removeOption(selection)" class="palette-selection-button md-raised md-primary"><span class="md-caption">Remove</span></md-button>
+              </div>
+            </md-list-item>
+          </md-list>
+        </div>
+      </md-content>
+    </div>
+  </div>
+  <div flex="40">
+    <div id="grid1" ui-grid="$ctrl.fixtureGridOptions" class="fixture-option-list-grid" ui-grid-resize-columns ui-grid-selection></div>
+  </div>
+</div>

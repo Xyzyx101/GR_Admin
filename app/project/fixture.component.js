@@ -44,7 +44,6 @@
       var idx = $scope.$parent.config.fixtures.indexOf(self.selectedFixture);
       $scope.$parent.config.fixtures.splice(idx, 1);
       self.selectedFixture = null;
-      console.log('deleteFixture');
     }
     function uniqueFixtureId() {
       var newIdx = 0;
@@ -74,21 +73,42 @@
       if(self.selectedFixture == null) { return; }
       for(let i = 0; i<self.selectedMasterOptions.length; ++i) {
         const option = self.selectedMasterOptions[i];
-        if(self.selectedFixture.options.indexOf(option) === -1) {
+        let alreadyInList = false;
+        for(let j = 0; j<self.selectedFixture.options.length; ++j) {
+          if(self.selectedFixture.options[j].OptionID == option.OptionID) {
+            alreadyInList = true;
+            break;
+          }
+        }
+        if(!alreadyInList) {
           self.selectedFixture.options.push(option);
         }
       }
+      self.fixtureGridApi.selection.clearSelectedRows();
+      $scope.selectedFixtureOptions = [];
     }
     self.removeOptions = function() {
       if(self.selectedFixture == null) { return; }
-      for(let i = 0; i<self.selectedFixtureOptions.length; ++i) {
-        const option = self.selectedFixtureOptions[i];
+      for(let i = 0; i<$scope.selectedFixtureOptions.length; ++i) {
+        const option = $scope.selectedFixtureOptions[i];
         const optionIdx = self.selectedFixture.options.indexOf(option);
         if(optionIdx !== -1) {
           self.selectedFixture.options.splice(optionIdx, 1);
         }
       }
-      console.log('removeOptions');
+      self.fixtureGridApi.selection.clearSelectedRows();
+      $scope.selectedFixtureOptions = [];
+    }
+    self.setDefaultOption = function() {
+      if(self.selectedFixture == null) { return; }
+      if($scope.selectedFixtureOptions.length > 0) {
+        self.selectedFixture.defaultOption = $scope.selectedFixtureOptions[0];
+      }
+    }
+
+    $scope.$parent.$watchCollection('config', updateSelectedFixture);
+    function updateSelectedFixture(newValue, oldValue) {
+      console.log(newValue);
     }
 
     self.fixtureTypes = ['MaterialOption', 'ModelOption', 'InstancedModelOption'];
@@ -117,18 +137,12 @@
     self.selectedMasterOptions = [];
     self.masterGridOptions.onRegisterApi = function(gridApi){
       //set gridApi on scope
-      self.gridApi = gridApi;
-      gridApi.selection.on.rowSelectionChanged($scope,function(row){
-        var msg = 'master row selected ' + row;
+      self.masterGridApi = gridApi;
+      self.masterGridApi.selection.on.rowSelectionChanged($scope,function(row){
         updateSelectedOptions(self.selectedMasterOptions, [row]);
-        self.selectedMasterRows = [row];
-        console.log(self.selectedMasterOptions);
       });
-      gridApi.selection.on.rowSelectionChangedBatch($scope,function(rows){
-        var msg = 'master rows changed ' + rows.length;
+      self.masterGridApi.selection.on.rowSelectionChangedBatch($scope,function(rows){
         updateSelectedOptions(self.selectedMasterOptions, rows);
-        self.selectedMasterRows = rows;
-        console.log(self.selectedMasterOptions);
       });
     };
 
@@ -155,31 +169,27 @@
       rowHeight: 25,
       showGridFooter:true,
       columnDefs: [
-        { field: 'OptionID', enableHiding: false, cellTooltip: true, width: '5%', enableColumnResizing: true},
-        { field: 'AssetName', enableHiding: false, cellTooltip: true, width: '20%', enableColumnResizing: true, enableFiltering: true },
-        { field: 'OptionType',enableHiding: false, cellTooltip: true, width: '10%', maxWidth: 200, minWidth: 70,enableColumnResizing: true},
-        { field: 'Category', enableHiding: false, cellTooltip: true, width: '12%',enableColumnResizing: true},
-        { field: 'OptionDisplayName', enableHiding: false, cellTooltip: true, width: '18%',enableColumnResizing: true },
-        { field: 'TechnicalName', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true},
-        { field: 'Collection', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true},
-        { field: 'Vendor', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true}
+        { field: 'OptionDisplayName', enableHiding: false, cellTooltip: true, width: '30%',enableColumnResizing: true },
+        { field: 'Category', enableHiding: false, cellTooltip: true, width: '15%',enableColumnResizing: true},
+        { field: 'TechnicalName', enableHiding: false, cellTooltip: true, width: '16%',enableColumnResizing: true},
+        { field: 'Collection', enableHiding: false, cellTooltip: true, width: '16%',enableColumnResizing: true},
+        { field: 'Vendor', enableHiding: false, cellTooltip: true, width: '15%',enableColumnResizing: true},
+        { field: 'OptionType',enableHiding: false, cellTooltip: true, width: '8%', maxWidth: 200, minWidth: 70,enableColumnResizing: true}
       ]
     };
 
-    self.selectedFixtureOptions = [];
+    $scope.selectedFixtureOptions = [];
     self.fixtureGridOptions.onRegisterApi = function(gridApi){
       //set gridApi on scope
-      self.gridApi = gridApi;
-      gridApi.selection.on.rowSelectionChanged($scope,function(row){
+      self.fixtureGridApi = gridApi;
+      self.fixtureGridApi.selection.on.rowSelectionChanged($scope,function(row){
         var msg = 'option row selected ' + row.isSelected;
-        updateSelectedOptions(self.selectedFixtureOptions, [row]);
-        console.log(self.selectedFixtureOptions);
+        updateSelectedOptions($scope.selectedFixtureOptions, [row]);
       });
 
-      gridApi.selection.on.rowSelectionChangedBatch($scope,function(rows){
+      self.fixtureGridApi.selection.on.rowSelectionChangedBatch($scope,function(rows){
         var msg = 'option rows changed ' + rows.length;
-        updateSelectedOptions(self.selectedFixtureOptions, rows);
-        console.log(self.selectedFixtureOptions);
+        updateSelectedOptions($scope.selectedFixtureOptions, rows);
       });
     };
   }

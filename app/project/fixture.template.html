@@ -21,34 +21,46 @@
     </div>
     <div flex="25" layout="column" layout-margin md-whiteframe="5" ng-if="$ctrl.selectedFixture!=null">
       <h1 class="md-headline" flex="15" md-colors="{background: 'accent'}" layout-padding>Fixture Details</h1>
-      <div flex="85" layout="column">
-        <md-input-container flex class="md-block">
-          <label>Fixture ID</label>
-          <input ng-model="$ctrl.selectedFixture.id">
-        </md-input-container>
-        <md-input-container flex class="">
-          <label>Type</label>
-          <md-select ng-model="$ctrl.selectedFixture.type">
-            <md-option ng-repeat="type in $ctrl.fixtureTypes" value="{{type}}">
-              {{type}}
-            </md-option>
-          </md-select>
-        </md-input-container>
-        <md-input-container flex>
-          <label>Display Text</label>
-          <input ng-model="$ctrl.selectedFixture.displayText">
-        </md-input-container>
-        <md-input-container flex class="md-block">
-          <label>Category Text</label>
-          <input ng-model="$ctrl.selectedFixture.categoryText">
-        </md-input-container>
-        <div flex="20" layout="row">
-          <md-input-container flex class="md-block">
-            <label>Default Option</label>
-            <input ng-model="$ctrl.selectedFixture.defaultOption" disabled>
+        <div flex="85" layout="column">
+         <form flex layout="column" name="fixtureConfig">
+          <md-input-container flex class="dense-form">
+            <label>Fixture ID</label>
+            <input name="id" ng-model="$ctrl.selectedFixture.id" required ng-pattern="/^[a-z\d-]+$/">
+            <div ng-messages="fixtureConfig.id.$error">
+              <div ng-message="required">This is required</div>
+              <div ng-message="pattern">ID should contain only lowercase letters[a-z], numbers[0-9] and dashes[-]</div>
+            </div>
           </md-input-container>
-          <md-button ng-click="$ctrl.setDefaultOption()" class="md-raised md-primary">Set Default</md-button>
-        </div>
+          <md-input-container flex class="dense-form">
+            <label>Type</label>
+            <md-select ng-model="$ctrl.selectedFixture.type">
+              <md-option name="type" ng-repeat="type in $ctrl.fixtureTypes" value="{{type}}" required>
+                {{type}}
+              </md-option>
+              <div ng-messages="fixtureConfig.type.$error">
+                <div ng-message="required">This is required</div>
+              </div>
+            </md-select>
+          </md-input-container>
+          <md-input-container flex class="dense-form">
+            <label>Display Text</label>
+            <input ng-model="$ctrl.selectedFixture.displayText" name="displayText" required>
+            <div ng-messages="fixtureConfig.displayText.$error">
+              <div ng-message="required">This is required</div>
+            </div>
+          </md-input-container>
+          <md-input-container flex class="dense-form">
+            <label>Category Text</label>
+            <input ng-model="$ctrl.selectedFixture.categoryText">
+          </md-input-container>
+          <div flex="20" layout="row" class="dense-form">
+            <md-input-container flex class="md-block">
+              <label>Default Option</label>
+              <input md-colors="{color: 'accent-700'}" ng-model="$ctrl.selectedFixture.defaultOption.OptionDisplayName" disabled>
+            </md-input-container>
+            <md-button ng-click="$ctrl.setDefaultOption()" class="md-raised md-primary">Set Default</md-button>
+          </div>
+        </form>
       </div>
     </div>
     <div flex="50" layout="column" layout-margin md-whiteframe="5" ng-if="$ctrl.selectedFixture!=null">

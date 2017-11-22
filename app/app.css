@@ -145,3 +145,20 @@ md-list.md-dense .fixture-list-item {
 .save-screen-container{
   height:500px;
 }
+
+.form-error {
+  opacity: 1;
+  margin-top: 0px;
+}
+
+.dense-form {
+  margin: 4px 0px;
+  padding: 0px;
+}
+
+.palette-selection-button {
+  margin: 2px;
+  padding: 2px;
+  min-width: 50px;
+  line-height: 25px;
+}
