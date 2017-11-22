@@ -57,13 +57,13 @@
             <md-list-item flex class="fixture-list-item" layout="row" layout-align="center center">
               <md-title flex="40" class="md-title">Fixture</md-title>
               <md-title flex="40" class="md-title">Option</md-title>
-              <md-title flex="20" class="md-title">Add/Remove</md-title>
+              <md-title flex="20" class="md-title">Set/Remove</md-title>
             </md-list-item>
             <md-list-item flex class="fixture-list-item" ng-repeat="selection in $ctrl.selectedPalette.selections" layout-margin>
               <md-subhead flex="40" class="md-subhead" ng-click="$ctrl.selectFixture(selection.fixture)" md-colors="selection.fixture.id==$ctrl.selectedFixture.id ? {background: 'accent'} : {background: 'background'}">{{selection.fixture.displayText}}</md-subhead>
               <md-subhead flex="40" class="md-subhead" ng-click="$ctrl.selectFixture(selection.fixture)" md-colors="selection.fixture.id==$ctrl.selectedFixture.id ? {background: 'accent'} : {background: 'background'}">{{selection.option.OptionDisplayName}}</md-subhead>
               <div flex="20" layout="row" layout-align="center center" layout-padding ng-if="selection.fixture.id==$ctrl.selectedFixture.id">
-                <md-button ng-click="$ctrl.addOption(selection)" class="palette-selection-button md-raised md-primary"><span class="md-caption">Add</span></md-button>
+                <md-button ng-click="$ctrl.setOption(selection)" class="palette-selection-button md-raised md-primary"><span class="md-caption">Set</span></md-button>
                 <md-button ng-click="$ctrl.removeOption(selection)" class="palette-selection-button md-raised md-primary"><span class="md-caption">Remove</span></md-button>
               </div>
             </md-list-item>

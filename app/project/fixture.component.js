@@ -15,16 +15,16 @@
     var self = this;
     var projectId = $scope.$parent.id
 
-    MasterList.Download();
-    $scope.$on("MasterList:Changed", function() {
-      let masterList = MasterList.GetList() || {'OptionList' : {}};
-      self.masterGridOptions.data = self.masterGridOptions.data.concat(masterList['OptionList']);
-    });
-    ProjectMasterList.Download();
-    $scope.$on("ProjectMasterList:Changed", function() {
-      let projectMasterList = ProjectMasterList.GetList() || {'OptionList' : {}};
-      self.masterGridOptions.data = self.masterGridOptions.data.concat(projectMasterList['OptionList']);
-    });
+    // MasterList.Download();
+    // $scope.$on("MasterList:Changed", function() {
+    //   let masterList = MasterList.GetList() || {'OptionList' : {}};
+    //   self.masterGridOptions.data = self.masterGridOptions.data.concat(masterList['OptionList']);
+    // });
+    // ProjectMasterList.Download();
+    // $scope.$on("ProjectMasterList:Changed", function() {
+    //   let projectMasterList = ProjectMasterList.GetList() || {'OptionList' : {}};
+    //   self.masterGridOptions.data = self.masterGridOptions.data.concat(projectMasterList['OptionList']);
+    // });
 
     self.createFixture = function() {
       if(typeof $scope.$parent.config.fixtures === 'undefined') {
@@ -105,12 +105,7 @@
         self.selectedFixture.defaultOption = $scope.selectedFixtureOptions[0];
       }
     }
-
-    $scope.$parent.$watchCollection('config', updateSelectedFixture);
-    function updateSelectedFixture(newValue, oldValue) {
-      console.log(newValue);
-    }
-
+    
     self.fixtureTypes = ['MaterialOption', 'ModelOption', 'InstancedModelOption'];
 
     self.masterGridOptions = {
@@ -133,6 +128,13 @@
         { field: 'Vendor', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true}
       ]
     };
+    self.masterGridOptions.data = $scope.$parent.masterList['OptionList'];
+    $scope.$on("MasterList:Changed", function() {
+        self.masterGridOptions.data = $scope.$parent.masterList['OptionList'];
+    });
+    $scope.$on("ProjectMasterList:Changed", function() {
+      self.masterGridOptions.data = $scope.$parent.masterList['OptionList'];
+    })
 
     self.selectedMasterOptions = [];
     self.masterGridOptions.onRegisterApi = function(gridApi){

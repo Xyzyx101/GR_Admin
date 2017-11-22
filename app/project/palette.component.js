@@ -115,11 +115,10 @@
       self.fixtureGridApi = gridApi;
       self.fixtureGridApi.selection.on.rowSelectionChanged($scope,function(row) {
         self.selectedFixtureOption = row.isSelected ? row.entity : null;
-        console.log(self.selectedFixtureOption);
       });
     };
 
-    self.addOption = function(selection) {
+    self.setOption = function(selection) {
       if(self.selectedFixtureOption !== null) {
         selection.option = self.selectedFixtureOption
       }
