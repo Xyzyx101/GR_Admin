@@ -33,8 +33,9 @@
       //then(function() {
       //  return
       firebaseAuth.$signInWithEmailAndPassword(email,password)
-      .then(retrieveDetails)
       .then(function(user) {
+        return retrieveDetails(user);
+      }).then(function(user) {
         deferred.resolve(user);
       }).catch(function(err){
         deferred.reject(err);

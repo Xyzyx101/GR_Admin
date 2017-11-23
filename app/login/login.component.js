@@ -29,7 +29,7 @@
     };
     $scope.$on("Auth:StateChanged", function() {
       var user = Auth.User();
-      if(user==null) {
+      if(user !== null) {
         $location.path('/home');
       }
     });

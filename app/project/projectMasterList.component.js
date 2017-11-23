@@ -19,8 +19,8 @@
     this.id = $scope.$parent.id;
     ProjectMasterList.Download(this.id);
     $scope.$on("ProjectMasterList:Changed", function() {
-      $scope.masterList = ProjectMasterList.GetList(self.id) || {'OptionList' : {}};
-      $scope.gridOptions.data = $scope.masterList['OptionList'];
+      $scope.masterList = ProjectMasterList.GetList(self.id) || {'optionList' : {}};
+      $scope.gridOptions.data = $scope.masterList['optionList'];
     });
 
     $scope.gridOptions = {
@@ -29,14 +29,14 @@
       rowHeight: 25,
       showGridFooter:true,
       columnDefs: [
-        { field: 'OptionID', enableHiding: false, cellTooltip: true, width: '10%', enableColumnResizing: true},
-        { field: 'AssetName', enableHiding: false, cellTooltip: true, width: '20%', enableColumnResizing: true, enableFiltering: true },
-        { field: 'OptionType',enableHiding: false, cellTooltip: true, width: '10%', maxWidth: 200, minWidth: 70,enableColumnResizing: true},
-        { field: 'Category', enableHiding: false, cellTooltip: true, width: '12%',enableColumnResizing: true},
-        { field: 'OptionDisplayName', enableHiding: false, cellTooltip: true, width: '18%',enableColumnResizing: true },
-        { field: 'TechnicalName', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true},
-        { field: 'Collection', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true},
-        { field: 'Vendor', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true}
+        { field: 'id', enableHiding: false, cellTooltip: true, width: '10%', enableColumnResizing: true},
+        { field: 'assetName', enableHiding: false, cellTooltip: true, width: '20%', enableColumnResizing: true, enableFiltering: true },
+        { field: 'type',enableHiding: false, cellTooltip: true, width: '10%', maxWidth: 200, minWidth: 70,enableColumnResizing: true},
+        { field: 'category', enableHiding: false, cellTooltip: true, width: '12%',enableColumnResizing: true},
+        { field: 'displayName', enableHiding: false, cellTooltip: true, width: '18%',enableColumnResizing: true },
+        { field: 'technicalName', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true},
+        { field: 'collection', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true},
+        { field: 'vendor', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true}
       ]
     };
     $scope.prettyJson = true;
@@ -58,7 +58,7 @@
       .then(verifyJsonData)
       .then(function(dataObj) {
         $scope.masterList = dataObj;
-        $scope.gridOptions.data = $scope.masterList['OptionList'];
+        $scope.gridOptions.data = $scope.masterList['optionList'];
         loadLog('File verified found ' + $scope.masterList.length + ' options');
         loadLog("Review the data below and press 'Upload' to update the database")
         $scope.uploadEnabled = true;
@@ -93,11 +93,11 @@
           return;
         }
         var tmpList;
-        if(Array.isArray(dataObj['OptionList'])) {
-          tmpList = dataObj['OptionList'];
-          loadLog("OptionList is an array");
+        if(Array.isArray(dataObj['optionList'])) {
+          tmpList = dataObj['optionList'];
+          loadLog("optionList is an array");
         } else {
-          deferred.reject("OptionList is not an array");
+          deferred.reject("optionList is not an array");
           return;
         }
         var optionIdx = 0;
@@ -122,36 +122,36 @@
 
     var uniqueIDs = [];
     function verifyOption(option) {
-      if (typeof option['AssetName'] !== "string" || option['AssetName'] === '') {
+      if (typeof option['assetName'] !== "string" || option['AssetName'] === '') {
         return 'Option : ' + optionCount + ' must have a name';
       }
-      if(typeof option['OptionType'] !== "string") {
+      if(typeof option['type'] !== "string") {
         return option['AssetName'] + ' must have a option type';
       }
-      if( option['OptionType'] !== "MaterialOption" && option['OptionType'] !== "ModelOption" && option['OptionType'] !== "InstancedModelOption") {
+      if( option['type'] !== "MaterialOption" && option['type'] !== "ModelOption" && option['type'] !== "InstancedModelOption") {
         return option['AssetName'] + ' has an invalid option type';
       }
-      if(typeof option['OptionID'] !== "string" || option['OptionID'] === '') {
+      if(typeof option['id'] !== "string" || option['id'] === '') {
         return option['AssetName'] + ' must have a OptionID';
       }
-      if (uniqueIDs.includes(option['OptionID'])) {
-        return option['AssetName'] + ' must have a unique OptionID';
+      if (uniqueIDs.includes(option['id'])) {
+        return option['assetName'] + ' must have a unique OptionID';
       }
-      uniqueIDs.push(option['AssetName']);
-      if(typeof option['OptionDisplayName'] !== "string" || option['OptionDisplayName'] === '') {
+      uniqueIDs.push(option['assetName']);
+      if(typeof option['displayName'] !== "string" || option['displayName'] === '') {
         return option['AssetName'] + ' must have a OptionDisplayName';
       }
-      if(typeof option['TechnicalName'] !== "string" || option['TechnicalName'] === '') {
-        loadWarn( option['AssetName'] + ' does not have a TechnicalName.  This will be a blank field on some reports.');
+      if(typeof option['technicalName'] !== "string" || option['technicalName'] === '') {
+        loadWarn( option['assetName'] + ' does not have a TechnicalName.  This will be a blank field on some reports.');
       }
-      if(typeof option['Collection'] !== "string" || option['Collection'] === '') {
+      if(typeof option['collection'] !== "string" || option['collection'] === '') {
         loadWarn( option['AssetName'] + ' does not have a Collection.  This will be a blank field on some reports.');
       }
-      if(typeof option['Vendor'] !== "string" || option['Vendor'] === '') {
+      if(typeof option['vendor'] !== "string" || option['vendor'] === '') {
         loadWarn( option['AssetName'] + ' does not have a Vendor.  This will be a blank field on some reports.');
       }
-      if(typeof option['Category'] !== "string" || option['Category'] === '') {
-        loadWarn( option['AssetName'] + ' does not have a Category.  This will be a blank field on some reports.');
+      if(typeof option['category'] !== "string" || option['category'] === '') {
+        loadWarn( option['assetName'] + ' does not have a Category.  This will be a blank field on some reports.');
       }
       return true;
     }

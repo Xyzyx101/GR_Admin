@@ -15,17 +15,6 @@
     var self = this;
     var projectId = $scope.$parent.id
 
-    // MasterList.Download();
-    // $scope.$on("MasterList:Changed", function() {
-    //   let masterList = MasterList.GetList() || {'OptionList' : {}};
-    //   self.masterGridOptions.data = self.masterGridOptions.data.concat(masterList['OptionList']);
-    // });
-    // ProjectMasterList.Download();
-    // $scope.$on("ProjectMasterList:Changed", function() {
-    //   let projectMasterList = ProjectMasterList.GetList() || {'OptionList' : {}};
-    //   self.masterGridOptions.data = self.masterGridOptions.data.concat(projectMasterList['OptionList']);
-    // });
-
     self.createFixture = function() {
       if(typeof $scope.$parent.config.fixtures === 'undefined') {
         $scope.$parent.config.fixtures = [];
@@ -75,7 +64,7 @@
         const option = self.selectedMasterOptions[i];
         let alreadyInList = false;
         for(let j = 0; j<self.selectedFixture.options.length; ++j) {
-          if(self.selectedFixture.options[j].OptionID == option.OptionID) {
+          if(self.selectedFixture.options[j].id == option.id) {
             alreadyInList = true;
             break;
           }
@@ -105,7 +94,7 @@
         self.selectedFixture.defaultOption = $scope.selectedFixtureOptions[0];
       }
     }
-    
+
     self.fixtureTypes = ['MaterialOption', 'ModelOption', 'InstancedModelOption'];
 
     self.masterGridOptions = {
@@ -118,22 +107,22 @@
       rowHeight: 25,
       showGridFooter:true,
       columnDefs: [
-        { field: 'OptionID', enableHiding: false, cellTooltip: true, width: '5%', enableColumnResizing: true},
-        { field: 'AssetName', enableHiding: false, cellTooltip: true, width: '20%', enableColumnResizing: true, enableFiltering: true },
-        { field: 'OptionType',enableHiding: false, cellTooltip: true, width: '10%', maxWidth: 200, minWidth: 70,enableColumnResizing: true},
-        { field: 'Category', enableHiding: false, cellTooltip: true, width: '12%',enableColumnResizing: true},
-        { field: 'OptionDisplayName', enableHiding: false, cellTooltip: true, width: '18%',enableColumnResizing: true },
-        { field: 'TechnicalName', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true},
-        { field: 'Collection', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true},
-        { field: 'Vendor', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true}
+        { field: 'id', enableHiding: false, cellTooltip: true, width: '5%', enableColumnResizing: true},
+        { field: 'assetName', enableHiding: false, cellTooltip: true, width: '20%', enableColumnResizing: true, enableFiltering: true },
+        { field: 'type',enableHiding: false, cellTooltip: true, width: '10%', maxWidth: 200, minWidth: 70,enableColumnResizing: true},
+        { field: 'category', enableHiding: false, cellTooltip: true, width: '12%',enableColumnResizing: true},
+        { field: 'displayName', enableHiding: false, cellTooltip: true, width: '18%',enableColumnResizing: true },
+        { field: 'technicalName', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true},
+        { field: 'collection', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true},
+        { field: 'vendor', enableHiding: false, cellTooltip: true, width: '10%',enableColumnResizing: true}
       ]
     };
-    self.masterGridOptions.data = $scope.$parent.masterList['OptionList'];
+    self.masterGridOptions.data = $scope.$parent.masterList['optionList'];
     $scope.$on("MasterList:Changed", function() {
-        self.masterGridOptions.data = $scope.$parent.masterList['OptionList'];
+        self.masterGridOptions.data = $scope.$parent.masterList['optionList'];
     });
     $scope.$on("ProjectMasterList:Changed", function() {
-      self.masterGridOptions.data = $scope.$parent.masterList['OptionList'];
+      self.masterGridOptions.data = $scope.$parent.masterList['optionList'];
     })
 
     self.selectedMasterOptions = [];
@@ -171,12 +160,12 @@
       rowHeight: 25,
       showGridFooter:true,
       columnDefs: [
-        { field: 'OptionDisplayName', enableHiding: false, cellTooltip: true, width: '30%',enableColumnResizing: true },
-        { field: 'Category', enableHiding: false, cellTooltip: true, width: '15%',enableColumnResizing: true},
-        { field: 'TechnicalName', enableHiding: false, cellTooltip: true, width: '16%',enableColumnResizing: true},
-        { field: 'Collection', enableHiding: false, cellTooltip: true, width: '16%',enableColumnResizing: true},
-        { field: 'Vendor', enableHiding: false, cellTooltip: true, width: '15%',enableColumnResizing: true},
-        { field: 'OptionType',enableHiding: false, cellTooltip: true, width: '8%', maxWidth: 200, minWidth: 70,enableColumnResizing: true}
+        { field: 'displayName', enableHiding: false, cellTooltip: true, width: '30%',enableColumnResizing: true },
+        { field: 'category', enableHiding: false, cellTooltip: true, width: '15%',enableColumnResizing: true},
+        { field: 'technicalName', enableHiding: false, cellTooltip: true, width: '16%',enableColumnResizing: true},
+        { field: 'collection', enableHiding: false, cellTooltip: true, width: '16%',enableColumnResizing: true},
+        { field: 'vendor', enableHiding: false, cellTooltip: true, width: '15%',enableColumnResizing: true},
+        { field: 'type',enableHiding: false, cellTooltip: true, width: '8%', maxWidth: 200, minWidth: 70,enableColumnResizing: true}
       ]
     };
 

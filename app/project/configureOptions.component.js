@@ -21,17 +21,17 @@
       convertStorageTypesToDisplay($scope.config);
     });
 
-    $scope.masterList = {'OptionList': []};
+    $scope.masterList = {'optionList': []};
 
     MasterList.Download();
     $scope.$on("MasterList:Changed", function() {
-      let masterList = MasterList.GetList() || {'OptionList' : []};
-      $scope.masterList['OptionList'] = $scope.masterList['OptionList'].concat(masterList['OptionList']);
+      let masterList = MasterList.GetList() || {'optionList' : []};
+      $scope.masterList['optionList'] = $scope.masterList['optionList'].concat(masterList['optionList']);
     });
     ProjectMasterList.Download();
     $scope.$on("ProjectMasterList:Changed", function() {
-      let projectMasterList = ProjectMasterList.GetList() || {'OptionList' : []};
-      $scope.masterList['OptionList'] = $scope.masterList['OptionList'].concat(projectMasterList['OptionList']);
+      let projectMasterList = ProjectMasterList.GetList() || {'optionList' : []};
+      $scope.masterList['optionList'] = $scope.masterList['optionList'].concat(projectMasterList['optionList']);
     });
 
     /***************
@@ -91,11 +91,11 @@
         for(let i = 0; i < config.fixtures.length; ++i) {
           let fixture = config.fixtures[i];
           if(fixture.defaultOption) {
-            fixture.defaultOption = fixture.defaultOption.OptionID;
+            fixture.defaultOption = fixture.defaultOption.id;
           }
           if(fixture.options) {
             for(let j = 0; j < fixture.options.length; ++j) {
-              fixture.options[j] = fixture.options[j].OptionID;
+              fixture.options[j] = fixture.options[j].id;
             }
           }
         }
@@ -106,7 +106,7 @@
           if(palette.selections) {
             for(let j = 0; j < palette.selections.length; ++j) {
               if(palette.selections[j].option) {
-                palette.selections[j].option = palette.selections[j].option.OptionID;
+                palette.selections[j].option = palette.selections[j].option.id;
               }
               palette.selections[j].fixture = palette.selections[j].fixture.id;
             }
@@ -116,10 +116,10 @@
     }
 
     function getOptionByID(id) {
-      if($scope.masterList.OptionList) {
-        for(let i = 0; i < $scope.masterList.OptionList.length; ++i) {
-          if($scope.masterList.OptionList[i].OptionID === id) {
-            return $scope.masterList.OptionList[i];
+      if($scope.masterList['optionList']) {
+        for(let i = 0; i < $scope.masterList['optionList'].length; ++i) {
+          if($scope.masterList['optionList'][i].id === id) {
+            return $scope.masterList['optionList'][i];
           }
         }
       }
@@ -187,8 +187,8 @@
           }
           for(let optionIdx = 0; optionIdx < fixture.options.length; ++optionIdx) {
             let option = getOptionByID(fixture.options[optionIdx]);
-            if(fixture.type != option.OptionType) {
-              infoError(fixture.id + ' with type ' + fixture.type + ' contains option ' + option.OptionDisplayName + ' with invalid type ' + option.OptionType);
+            if(fixture.type != option.type) {
+              infoError(fixture.id + ' with type ' + fixture.type + ' contains option ' + option.displayName + ' with invalid type ' + option.type);
               deferred.reject('Verification Failed!');
             }
           }

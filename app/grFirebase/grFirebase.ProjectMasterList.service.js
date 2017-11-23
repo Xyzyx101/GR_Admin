@@ -9,7 +9,7 @@
 
   /* @ngInject */
   function ProjectMasterList($rootScope, $log, Cleaner) {
-    var list = {"OptionList": []};
+    var list = {'optionList': []};
 
     function download(projectId) {
       firebase.database().ref('/projectMasterList/'+projectId+'/').orderByKey().limitToLast(1).once('value', function(snapshot) {
