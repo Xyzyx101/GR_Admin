@@ -101,12 +101,12 @@
       rowHeight: 25,
       multiSelect: false,
       columnDefs: [
-        { field: 'OptionDisplayName', enableHiding: false, cellTooltip: true, width: '23%',enableColumnResizing: true },
-        { field: 'OptionType',enableHiding: false, cellTooltip: true, width: '10%', maxWidth: 200, minWidth: 70,enableColumnResizing: true},
-        { field: 'Category', enableHiding: false, cellTooltip: true, width: '17%',enableColumnResizing: true},
-        { field: 'TechnicalName', enableHiding: false, cellTooltip: true, width: '15%',enableColumnResizing: true},
-        { field: 'Collection', enableHiding: false, cellTooltip: true, width: '15%',enableColumnResizing: true},
-        { field: 'Vendor', enableHiding: false, cellTooltip: true, width: '15%',enableColumnResizing: true}
+        { field: 'displayName', enableHiding: false, cellTooltip: true, width: '23%',enableColumnResizing: true },
+        { field: 'optionType',enableHiding: false, cellTooltip: true, width: '10%', maxWidth: 200, minWidth: 70,enableColumnResizing: true},
+        { field: 'category', enableHiding: false, cellTooltip: true, width: '17%',enableColumnResizing: true},
+        { field: 'technicalName', enableHiding: false, cellTooltip: true, width: '15%',enableColumnResizing: true},
+        { field: 'collection', enableHiding: false, cellTooltip: true, width: '15%',enableColumnResizing: true},
+        { field: 'vendor', enableHiding: false, cellTooltip: true, width: '15%',enableColumnResizing: true}
       ]
     };
 

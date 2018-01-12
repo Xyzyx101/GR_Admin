@@ -53,6 +53,9 @@
 
     self.selectedFixture = null;
     self.selectFixture = function(fixture) {
+      if(self.fixtureGridApi != null) {
+        self.fixtureGridApi.selection.clearSelectedRows();
+      }
       self.selectedFixture = fixture;
       self.selectedFixture.options = self.selectedFixture.options || [];
       self.fixtureGridOptions.data = self.selectedFixture.options;
