@@ -18,7 +18,7 @@
     this.password = '';
 
   this.Login = function() {
-      Auth.Login(this.email, this.password)
+      Auth.EmailLogin(this.email, this.password)
       .then(function(user){
         if(user!=null) {
             $location.path('/home');

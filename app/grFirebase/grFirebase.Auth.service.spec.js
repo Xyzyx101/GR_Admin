@@ -13,7 +13,7 @@ describe('Auth service', function() {
   }));
 
   it('Login should return a promise', inject(function(Auth) {
-    var promise = Auth.Login('foo@bar.com', 'password');
+    var promise = Auth.EmailLogin('foo@bar.com', 'password');
     expect(promise).toBeDefined();
     expect(promise.constructor.name).toBe('Promise');
   }));
