@@ -1,3 +1,4 @@
 [submodule "grFirebase"]
 	path = app/grFirebase
 	url = https://github.com/Xyzyx101/grFirebase.git
+	branch = production
