@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "production": "gr-admin-prod",
+    "test": "gr-admin-test"
+  }
+}
